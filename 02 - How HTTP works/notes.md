@@ -55,4 +55,15 @@ $npm i -D nodemon
   - this is also returned with the header
 
 ## returning JSON data
-- 
+- we can send this as a single response right in `res.send()`
+  - but we have to use `JSON.Stringify()` on the object we send
+    - todos is a mock object we declared in a constant 
+  - It's usefull to send the data down in an object with a success key for error handling
+``` JS
+res.end( 
+    JSON.stringify({
+      success: true,
+      data: todos
+    })
+  );
+```
