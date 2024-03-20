@@ -45,4 +45,14 @@ $npm i -D nodemon
 - Setup a script in package.json to run server.js with nodemon
 
 # 3. Responding with Data
+- `res.write('Hello')` is an easy way to return an response
+- It's common to set a header as as well so the browser knows what it's receiving
+  - `text/plain` for plain text
+  - `text/html` for HTML (self explanatory)
+- example: `res.setHeader('Content-Type', 'text/plain');` before writing the response.
+- `X-Powered-By` is used to specify what technology is running the server.
+  - in this case NodeJS
+  - this is also returned with the header
 
+## returning JSON data
+- 

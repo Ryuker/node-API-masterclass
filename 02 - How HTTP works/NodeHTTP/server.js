@@ -1,11 +1,8 @@
 const http = require('http');
 
 const server = http.createServer((req, res) => {
-  const {headers, url, method } = req;
-  
-  console.log(headers, url, method);
-  
-  // Ends the response so the request isn't hanging untill a response
+  res.setHeader('Content-Type', 'application/json');
+  res.write('Hello');
   res.end();
 });
 
