@@ -1,0 +1,17 @@
+{
+  "name": "nodehttp",
+  "version": "1.0.0",
+  "description": "Learning http",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "keywords": [
+    "http"
+  ],
+  "author": "Ryuker",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

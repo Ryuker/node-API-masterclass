@@ -37,3 +37,12 @@ $node server.js
 
 # 2. Installing Nodemon
 - package to watch the server files so we don't have to restart the server everytime
+- created a package.json file using `npm init` with some configuration
+- installed nodemon using
+``` JS Terminal
+$npm i -D nodemon
+```
+- Setup a script in package.json to run server.js with nodemon
+
+# 3. Responding with Data
+
