@@ -87,4 +87,24 @@ important HTTP status codes
 | 5.xx | Server Error |
 | 500 | Internal Server Error |
 
+- This is a typical `404` response to return
+``` JS
+{
+  success: false,
+  error: 'Not Found',
+  data: null
+}
+```
+
+- This is a cleaning way of setting the header
+``` JS
+res.writeHead(404, {
+    'Content-Type': 'application/json',
+    'X-Powered-By': 'Node.js'
+  });
+```
+
+## Sending Data To The Server
+
+
 
