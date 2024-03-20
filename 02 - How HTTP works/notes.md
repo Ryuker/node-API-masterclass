@@ -105,6 +105,18 @@ res.writeHead(404, {
 ```
 
 ## Sending Data To The Server
+- Usually when sending data to the server you'd send a `JSON web token` in the request header
+- It's also good practise so send a `Content-Type`
+- example of parsing the body on the server (with JSON data being sent from the client)
+``` JS server.js
+let body = [];
 
+req.on('data', chunk => {
+  body.push(chunk);
+}).on('end', () => {
+  body = Buffer.concat(body).toString();
+  console.log(body);
+})
+```
 
 

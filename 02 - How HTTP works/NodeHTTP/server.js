@@ -14,6 +14,18 @@ const server = http.createServer((req, res) => {
     'X-Powered-By': 'Node.js'
   });
 
+  // Accessing request headers
+  // console.log(req.headers.authorization);
+
+  // Parsing the request body - JSON data is being received from the client
+  let body = [];
+  req.on('data', chunk => {
+    body.push(chunk);
+  }).on('end', () => {
+    body = Buffer.concat(body).toString();
+    console.log(body);
+  })
+
   res.end( 
     JSON.stringify({
       success: false,
