@@ -137,4 +137,47 @@ req.on('data', chunk => {
 | PUT /todos/1 | Update todo with ID of 1 |
 | DELETE /todos/1 | Delete todo with ID of 1 |
 
+## Handling a GET request with the HTTP module
+- Below modifies the response when request uses the `/todos` route
+  - status is set to `404` by default, this is modified when the request is of the correct route
+``` JS server.js
+const server = http.createServer((req, res) => {
+  const { method, url } = req;
+  
+  // Parsing the request body - JSON data is being received from the client
+  let body = [];
+
+  req.on('data', chunk => {
+    body.push(chunk);
+  }).on('end', () => {
+    body = Buffer.concat(body).toString();
+
+    let status = 404;
+
+    const response = {
+      succes: false,
+      data: null
+    };
+
+    // Handling a GET request to /todos
+    if (method === 'GET' && url === '/todos') {
+      status = 200;
+      response.succes = true;
+      response.data = todos;
+    }
+    
+    res.writeHead(status, {
+      'Content-Type': 'application/json',
+      'X-Powered-By': 'Node.js'
+    });
+
+    res.end( 
+      JSON.stringify(response)
+    );
+
+    console.log(body);
+  })
+
+});
+```
 
