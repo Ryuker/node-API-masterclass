@@ -181,3 +181,28 @@ const server = http.createServer((req, res) => {
 });
 ```
 
+## Handling a POST request with the HTTP module
+- this is fairly simple
+  - we destructure the body after we JSON parse it, taking out the `id` and the `text`
+  - we validate if neither of these items are null, else we send a `400` (bad request) with an error
+  - if validation is passes we updates the todos array with a new object using the keys we destructured earlier
+    - we then send a `201` (created) with response data set to the current todos array
+``` JS server.js
+ // Handling a POST request
+if(method == 'POST' && url == '/todos') {
+  const { id, text} = JSON.parse(body);
+  
+  // validation to make sure we have received all required object keys 
+  if (!id || !text) {
+    status = 400;
+    response.error = `Please ensure there's an 'id' and 'text' in the request`;
+  } else {// validation passed, updated the todos and modify the response and status
+    todos.push( { id: id, text: text} );
+    status = 201;
+    response.succes = true;
+    console.log(todos);
+    response.data = todos;
+  }
+}
+```
+

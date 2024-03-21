@@ -21,7 +21,8 @@ const server = http.createServer((req, res) => {
 
     const response = {
       succes: false,
-      data: null
+      data: null,
+      error: null
     };
 
     // Handling a GET request to /todos
@@ -29,6 +30,22 @@ const server = http.createServer((req, res) => {
       status = 200;
       response.succes = true;
       response.data = todos;
+    } 
+    // Handling a POST request
+    else if(method == 'POST' && url == '/todos') {
+      const { id, text} = JSON.parse(body);
+      
+      // validation to make sure we have received all required object keys 
+      if (!id || !text) {
+        status = 400;
+        response.error = `Please ensure there's an 'id' and 'text' in the request`;
+      } else {// validation passed, updated the todos and modify the response and status
+        todos.push( { id: id, text: text} );
+        status = 201;
+        response.succes = true;
+        console.log(todos);
+        response.data = todos;
+      }
     }
     
     res.writeHead(status, {
