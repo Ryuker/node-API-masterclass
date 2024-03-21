@@ -7,32 +7,42 @@ const todos = [
 ]
 
 const server = http.createServer((req, res) => {
-  res.statusCode = 404;
-
-  res.writeHead(404, {
-    'Content-Type': 'application/json',
-    'X-Powered-By': 'Node.js'
-  });
-
-  // Accessing request headers
-  // console.log(req.headers.authorization);
-
+  const { method, url } = req;
+  
   // Parsing the request body - JSON data is being received from the client
   let body = [];
+
   req.on('data', chunk => {
     body.push(chunk);
   }).on('end', () => {
     body = Buffer.concat(body).toString();
+
+    let status = 404;
+
+    const response = {
+      succes: false,
+      data: null
+    };
+
+    // Handling a GET request to /todos
+    if (method === 'GET' && url === '/todos') {
+      status = 200;
+      response.succes = true;
+      response.data = todos;
+    }
+    
+    res.writeHead(status, {
+      'Content-Type': 'application/json',
+      'X-Powered-By': 'Node.js'
+    });
+
+    res.end( 
+      JSON.stringify(response)
+    );
+
     console.log(body);
   })
 
-  res.end( 
-    JSON.stringify({
-      success: false,
-      error: 'Not Found',
-      data: null
-    })
-  );
 });
 
 const PORT = 5000;
