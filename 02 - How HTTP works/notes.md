@@ -119,4 +119,22 @@ req.on('data', chunk => {
 })
 ```
 
+## HTTP Methods & RESTful APIs
+[All Methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
+| - | - |
+| :- | :- |
+| GET | Retrieve Resource |
+| POST | Submit Resource |
+| PUT / PATCH | Update Resource |
+| DELETE | Delete/Destroy Resource |
+
+**Resful API Standards**
+| - | - |
+| :- | :- |
+| GET /todos | Get todos |
+| GET /todos/1 | Get todo with ID of 1 |
+| POST /todos | Add a todo |
+| PUT /todos/1 | Update todo with ID of 1 |
+| DELETE /todos/1 | Delete todo with ID of 1 |
+
 
