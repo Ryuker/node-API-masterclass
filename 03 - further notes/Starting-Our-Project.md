@@ -61,6 +61,7 @@ app.get('/', (req, res) => {
   ```
 
 ## Route Structure
+- We version the API in the route so we can deprecate routes over time when update the API to a new version.
 | GET / POST / PUT / Delete | 
 | :- |
 | /api/v1/bootcamps |
