@@ -128,18 +128,35 @@ app.use('/api/v1/bootcamps', bootcamps);
 ```
 
 # 5. Reorganizing routes to use controller methods
+- Controller methods will handle the tasks per each route.
 - Created `controllers/bootcamps.js` in the project folder
 - Basic exported method
 ``` JS controllers/bootcamps.js
 // @desc    Get all bootcamps
 // @route   GET/api/v1/bootcamps
 // @access  Public
-exports.getBootcaps = (req, res, next ) => {
+exports.getBootcamps = (req, res, next ) => {
   res.status(200)
   .json( { success: true, msg: 'Show all bootcamps' });
 };
 ```
 - For each method we're providing some info regarding what the method does, the route and access rights
+
+- in `routes/bootcamps.js` we destructure the controller methods and then specify them on the route.
+``` JS routes/bootcamps.js
+router
+  .route('/')
+  .get(getBootcamps)
+  .post(createBootcamp);
+
+// Single item
+router
+  .route('/:id')
+  .get(getBootcamp)
+  .put(updateBootcamp)
+  .delete(deleteBootcamp);
+```
+- This makes it much neather to work with.
 
 
 
