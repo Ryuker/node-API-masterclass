@@ -128,6 +128,20 @@ app.use('/api/v1/bootcamps', bootcamps);
 ```
 
 # 5. Reorganizing routes to use controller methods
+- Created `controllers/bootcamps.js` in the project folder
+- Basic exported method
+``` JS controllers/bootcamps.js
+// @desc    Get all bootcamps
+// @route   GET/api/v1/bootcamps
+// @access  Public
+exports.getBootcaps = (req, res, next ) => {
+  res.status(200)
+  .json( { success: true, msg: 'Show all bootcamps' });
+};
+```
+- For each method we're providing some info regarding what the method does, the route and access rights
+
+
 
 
 
