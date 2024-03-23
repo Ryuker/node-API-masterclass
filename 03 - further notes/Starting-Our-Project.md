@@ -50,6 +50,15 @@ app.get('/', (req, res) => {
   res.send('Hello from express');
 });
 ```
+- By default `res.send()` sends a response as html
+  - but when we send JSON data the header is updated to the proper content-type automatically
+
+- We can use `res.status()` to specify the status
+  - it's good practise to specify the status manually and send an object as a response
+  example:
+  ``` JS
+  res.status(200).json( { success: true, data: { id: 1 } });
+  ```
 
 
 
