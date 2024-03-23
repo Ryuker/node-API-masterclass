@@ -127,6 +127,9 @@ const bootcamps = require('./routes/bootcamps');
 app.use('/api/v1/bootcamps', bootcamps);
 ```
 
+# 5. Reorganizing routes to use controller methods
+
+
 
 
 
