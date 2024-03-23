@@ -180,6 +180,23 @@ const logger = (req, res, next) => {
 app.use(logger);
 ```
 
+## example of using a piece of third party middleware
+- For this example we use `Morgan` | [github link](https://github.com/expressjs/morgan)
+  - this is a more advanced logger
+- to install
+``` JS terminal
+npm i morgan
+```
+- in server.js we only use this if we're in dev mode
+``` JS server.js
+// - Dev logging
+if (process.env.NODE_ENV === 'development'){
+  app.use(morgan('dev'));
+}
+```
+
+
+
 
 
 
