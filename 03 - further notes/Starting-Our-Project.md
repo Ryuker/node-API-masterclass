@@ -170,9 +170,16 @@ const logger = (req, res, next) => {
   console.log('Middleware ran');
   next();
 };
+```
+- It's good practise to keep middleware in their own files and then export them.
+- So created `middleware/logger.js` for this example
+  - exported the logger and imported into server.js
 
+- to use middleware in the server app
+``` JS server.js
 app.use(logger);
 ```
+
 
 
 
