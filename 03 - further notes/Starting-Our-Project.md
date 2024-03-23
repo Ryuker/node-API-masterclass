@@ -43,4 +43,14 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on PORT ${PORT}`));
 ```
 
+# 3. Creating Routes & Responses
+## Get request
+``` JS server.js
+app.get('/', (req, res) => {
+  res.send('Hello from express');
+});
+```
+
+
+
 
