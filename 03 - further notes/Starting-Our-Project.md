@@ -158,6 +158,9 @@ router
 ```
 - This makes it much neather to work with.
 
+# 6. Intro to Middleware
+
+
 
 
 
