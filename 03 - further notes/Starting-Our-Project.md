@@ -44,7 +44,7 @@ app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on 
 ```
 
 # 3. Creating Routes & Responses
-## Get request
+## Get request handler
 ``` JS server.js
 app.get('/', (req, res) => {
   res.send('Hello from express');
