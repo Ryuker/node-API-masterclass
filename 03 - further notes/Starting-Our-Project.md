@@ -95,13 +95,41 @@ app.put('/api/v1/bootcamps/:id', (req, res) => {
 });
 
 app.delete('/api/v1/bootcamps/:id', (req, res) => {
-  res.status(204).json( { success: true, msg: `Deleted bootcamp ${req.params.id}` });
+  res.status(200).json( { success: true, msg: `Deleted bootcamp ${req.params.id}` });
 });
 ```
 
 
-# 4. Setting up Express Router
+# 4. Reorganizing routes into a seperate module
 - This allows us to handle route requests in seperate modules, better for organization.
+
+- Created `routes/bootcamps.js` in the folder
+``` JS bootcamps.js
+const express = require('express');
+const router = express.Router();
+
+// All routes go here
+router.get();
+//etc
+
+// export the router
+module.exports = router.
+```
+
+- imported the router into `server.js`
+``` JS server.js
+// Route files
+const bootcamps = require('./routes/bootcamps');
+```
+- specified the route base url
+``` JS server.js
+// Mount routers
+app.use('/api/v1/bootcamps', bootcamps);
+```
+
+
+
+
 
 
 
