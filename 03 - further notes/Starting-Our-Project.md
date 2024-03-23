@@ -159,6 +159,21 @@ router
 - This makes it much neather to work with.
 
 # 6. Intro to Middleware
+- Middleware is a function that has acccess to the request/response cycle
+  - it allows you to set request variables among others.
+
+- basic middleware example. This runs on each request and logs some text
+``` JS server.js
+// Middleware
+const logger = (req, res, next) => {
+  req.hello = 'Hello World';
+  console.log('Middleware ran');
+  next();
+};
+
+app.use(logger);
+```
+
 
 
 
