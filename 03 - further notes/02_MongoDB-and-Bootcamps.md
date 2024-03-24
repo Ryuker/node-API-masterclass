@@ -46,4 +46,8 @@ process.on('unhandledRejection', (err, promise) => {
 });
 ```
 
+# 3. Adding colors in the console
+- we're using a package for this
+
+
 
