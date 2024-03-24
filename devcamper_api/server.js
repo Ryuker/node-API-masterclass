@@ -28,7 +28,9 @@ app.use('/api/v1/bootcamps', bootcamps);
 
 const PORT = process.env.PORT || 5000;
 
-
+/////////////////
+// Run the server
+/////////////////
 const server = app.listen(
   PORT, 
   console.log(`Server running in ${process.env.NODE_ENV} mode on PORT ${PORT}`)
