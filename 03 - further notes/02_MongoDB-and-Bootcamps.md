@@ -15,4 +15,24 @@
 ``` JS Terminal
 npm i mongoose
 ```
+- we moved config.env into a `env` folder so it's only stored locally. 
+- in `.gitignore` we specified that the `env` folder should be ignored
+
+- in `config/db.js` we hooked up mongoose to the database
+``` JS db.js
+const mongoose = require('mongoose');
+
+const connectDB = async () => {
+  const conn = mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParse: true,
+    useCreateIndex: true,
+    useFindAndMody: false
+  });
+};
+
+console.log(`MongoDB connected: ${conn.connection.host}`);
+
+module.exports = connectDB;
+```
+
 
