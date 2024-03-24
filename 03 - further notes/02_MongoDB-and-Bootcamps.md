@@ -47,7 +47,12 @@ process.on('unhandledRejection', (err, promise) => {
 ```
 
 # 3. Adding colors in the console
-- we're using a package for this
+- we're using a package, `colors` for this | [github repo](https://github.com/Marak/colors.js)
+- to install:
+``` JS Terminal
+npm i colors
+```
+
 
 
 
