@@ -55,6 +55,32 @@ npm i colors
 - we need to import it into server.js
 - we can then use `..yellow.bold` (for example) behind the string for a console output
 
+# 4. Create the Bootcamp model
+- Added a models folder with 
+- Added `Bootcamp.js` to hold the Bootcamp schema
+  - It's customary to capitalize the first letters of model files
+``` JS models/Bootcamp.js
+const mongoose = require('mongoose');
+
+const BootcampSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, 'Please add a name'],
+    unique: true,
+    trim: true,
+    maxlength: [50, 'Name can not be more than 50 characters']
+  },
+  // Additional schema objects go here
+
+});
+
+// exporting the schema
+module.exports = mongoose.model('Bootcamp', BootcampSchema);
+```
+
+# 5. Create Basic CRUD functionality for Bootcamps
+
+
 
 
 
