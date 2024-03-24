@@ -46,12 +46,16 @@ process.on('unhandledRejection', (err, promise) => {
 });
 ```
 
-# 3. Adding colors in the console
+# 3. Adding colors in the console for readability
 - we're using a package, `colors` for this | [github repo](https://github.com/Marak/colors.js)
 - to install:
 ``` JS Terminal
 npm i colors
 ```
+- we need to import it into server.js
+- we can then use `..yellow.bold` (for example) behind the string for a console output
+
+
 
 
 
