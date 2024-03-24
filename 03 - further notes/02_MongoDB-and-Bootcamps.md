@@ -31,4 +31,19 @@ console.log(`MongoDB connected: ${conn.connection.host}`);
 module.exports = connectDB;
 ```
 
+## Refactor server.js to handle unhandled rejections
+- put app.listen into a `server` constant
+  - this allows us to close it if we need to.
+
+- code to handle unhandled rejections
+``` JS server.js
+// Handle unhandled rejections
+process.on('unhandledRejection', (err, promise) => {
+  console.log(`Error: ${err.message}`);
+  
+  // Close server & exut process
+  server.close(() => process.exit(1));
+});
+```
+
 
