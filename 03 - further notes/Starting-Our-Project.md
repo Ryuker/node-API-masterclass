@@ -195,6 +195,14 @@ if (process.env.NODE_ENV === 'development'){
 }
 ```
 
+## Postman Environment & Collection Setup
+- created Postman account so we can save variables for easy requests
+- we can set global variables in the environment, I made a `devcamper` environment
+- `{{URL}}` we can use this in the request so we don't have to specify the base url all the time
+- created various requests in a collection `DevCamper API` for sending easy requests.
+
+
+
 
 
 
