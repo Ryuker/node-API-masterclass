@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const bootcamps = require('./routes/bootcamps');
 
 // Load env vars
-dotenv.config({path: './config/config.env'});
+dotenv.config({path: './env/config.env'});
 
 // declaring the app
 const app = express();
