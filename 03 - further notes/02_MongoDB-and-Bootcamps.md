@@ -79,6 +79,21 @@ module.exports = mongoose.model('Bootcamp', BootcampSchema);
 ```
 
 # 5. Creating Bootcamps - POST
+- imported the `Bootcamp` model into bootcamp controller
+- in Postman we configured a header preset to ensure we pass in application/json as content-type
+  - this is just usefull for sending consistent request headers
+
+## Middleware to use req.body
+- In `server.js` we add body parser middleware, this is included in express.
+  - this allows us to access the request body in controllers.
+``` JS server.js
+// Body parser
+app.use(express.json());
+```
+
+
+
+
 
 
 
