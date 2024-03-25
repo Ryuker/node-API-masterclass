@@ -112,6 +112,25 @@ exports.createBootcamp = async (req, res, next ) => {
 };
 ```
 
+# 6. Fetching Bootcamps - GET
+## Fetching all Bootcamps - GET
+- simple stuff, modified `getBootcamps` to an async function and used `Bootcamp.find()` to get all entries.
+``` JS controllers/bootcamps.js
+exports.getBootcamps = async(req, res, next ) => {
+  try {
+    const bootcamps = await Bootcamp.find();
+    res.status(200)
+      .json( { success: true, data: bootcamps });
+  } catch (err) {
+    res.status(404)
+      .json( { success: false, error: err });
+  }
+};
+```
+## Fetching single bootcamp - GET:id
+
+
+
 
 
 
