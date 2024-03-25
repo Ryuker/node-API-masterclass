@@ -78,7 +78,9 @@ const BootcampSchema = new mongoose.Schema({
 module.exports = mongoose.model('Bootcamp', BootcampSchema);
 ```
 
-# 5. Create Basic CRUD functionality for Bootcamps
+# 5. Creating Bootcamps - POST
+
+
 
 
 
