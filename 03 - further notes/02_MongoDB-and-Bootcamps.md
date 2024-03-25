@@ -91,6 +91,26 @@ module.exports = mongoose.model('Bootcamp', BootcampSchema);
 app.use(express.json());
 ```
 
+## Creating the database entry
+- in `createBootcamp` we changed the callback to and async function
+- we then await `Bootcamp.create` with the req.body passed as parameters.
+
+## Error handling
+- this is temporary as we'll be writing a custom error handler.
+- but for avoiding to add duplicates we used a `try catch` block in createBootcamp 
+``` JS controllers/bootcamps.js
+exports.createBootcamp = async (req, res, next ) => {
+  try {
+    const bootcamp = await Bootcamp.create(req.body);
+    
+    res.status(201)
+      .json( { success: true, data: bootcamp });
+  } catch (err) {
+    res.status(400)
+      .json( { success: false, error: err });
+  }
+};
+```
 
 
 
