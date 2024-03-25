@@ -77,8 +77,21 @@ exports.updateBootcamp = async (req, res, next ) => {
 // @desc    Delete bootcamp
 // @route   DELETE /api/v1/bootcamps/:id
 // @access  Private
-exports.deleteBootcamp = (req, res, next ) => {
-  res.status(200)
-  .json( { success: true, msg: `Deleted bootcamp ${req.params.id}` });
+exports.deleteBootcamp = async (req, res, next ) => {
+  try {
+    const bootcamp = await Bootcamp.findByIdAndDelete(req.params.id);
+
+    // Send 400 if the ID didn't return a result from the database
+    if (!bootcamp) {
+      return res.status(400).json({ success: false });
+    }
+
+    res.status(200)
+      .json( { success: true, msg: `Deleted bootcamp ${req.params.id}` , data: {} });
+
+  } catch(err) {
+    res.status(400)
+      .json( { success: false });
+  }
 };
 
