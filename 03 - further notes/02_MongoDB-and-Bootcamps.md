@@ -128,7 +128,21 @@ exports.getBootcamps = async(req, res, next ) => {
 };
 ```
 ## Fetching single bootcamp - GET:id
+- very similar to get all bootcamps but we use `findById(req.params.id)` as request method to the database
+``` JS controllers.bootcamps.js
+exports.getBootcamp = async (req, res, next ) => {
+  try {
+    const bootcamp = await Bootcamp.findById(req.params.id);
 
+    res.status(200)
+      .json( { success: true, data: bootcamp });
+      
+  } catch (err) {
+    res.status(400)
+      .json( { success: false, error: err });
+  }
+};
+```
 
 
 
