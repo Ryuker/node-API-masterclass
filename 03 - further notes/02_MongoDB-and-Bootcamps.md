@@ -151,7 +151,7 @@ exports.getBootcamp = async (req, res, next ) => {
 
 # 7. Updating Bootcamps - PUT
 - Very similar but we use the following to submit the update to the database
-  - we need to pass doen the `params.id` and the `req.body`
+  - we need to pass the `params.id` and the `req.body`
   - we need to specify it's new and run the mongoose validators
 ``` JS controllers/bootcamps.js | updateBootcamp()
 findByIdAndUpdate(req.params.id, req.body, {
