@@ -49,3 +49,20 @@ class ErrorResponse extends Error {
 
 module.exports = ErrorResponse;
 ```
+
+- Modified `error.js` response
+``` JS error.js
+res.status(err.statusCode || 500).json({
+  success: false,
+  error: err.message || 'Server Error'
+});
+```
+
+## Use errorHandler in Bootcamps controller
+- imported `errorResponse` into `bootcamps` controller
+- used in getSingleID request handler's next parameter
+  - this is temporary
+``` JS controllers/bootcamps.js
+next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404));
+```
+
