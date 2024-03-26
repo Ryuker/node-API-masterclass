@@ -67,5 +67,25 @@ next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404));
 ```
 
 # 3. Mongoose Error Handling [1]
+- modified `error.js` to handle `CastErrors`
+  - for this we make a copy of the error, and set it's message to the original err message.
+  ``` JS
+  let error = { ...err };
+  error.message = err.message;
+  ```
 
+  - we then check it's name, if it's a `Cast Error` we pass a custom `ErrorResponse`
+  ``` JS 
+  // Mongoose bad ObjectId
+    if (err.name === 'CastError') {
+      const message = `Bootcamp id is not formatted properly - id: ${err.value}`;
+      error = new ErrorResponse(message, 404);
+    }
+  ```
+- modified `controllers/bootcamps.js` 
+  - to just pass in err into the next parameter in the try catch block 
+    - since we're now handling it in the error middleware.
 
+- did this for all the routeHandlers
+  - Also made sure to send a custom response where the ID format does match but isn't in the database. 
+  
