@@ -104,4 +104,16 @@ if (err.code === 11000) {
 ```
 
 ## Validation Error Handling
+- For this we check for a `ValidationError` in `error.js`
+- We then create an array which maps through the errors and get the validation message of each one
+- we then send a response with the array and status
+``` JS erros.js
+// Mongoose validation error
+if (err.name === 'ValidationError') {
+  const message = Object.values(err.errors).map(val => val.message);
+  error = new ErrorResponse(message, 400);
+}
+```
+
+
 
