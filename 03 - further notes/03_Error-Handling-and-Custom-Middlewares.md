@@ -116,7 +116,14 @@ if (err.name === 'ValidationError') {
 ```
 
 # 4. Async Await Middleware
+- We added an `async.js` piece of middleware
+  - This handles catch automatically
+``` JS
+const asyncHandler = fn => (req, res, next) => 
+  Promise.resolve(fn(req, res, next)).catch(next);
 
+module.exports = asyncHandler;
+```
 
 
 
