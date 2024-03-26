@@ -126,7 +126,7 @@ module.exports = asyncHandler;
 ```
 - in `controllers/bootcamps` we then import this async handler and wrap the handler in it like below
   - this way we don't need to use try catch in the async function passed into the asyncHandler
-  
+
 ``` JS controllers/bootcamps.js
 exports.getBootcamps = asyncHandler( async(req, res, next ) => {
   const bootcamps = await Bootcamp.find();
@@ -134,6 +134,9 @@ exports.getBootcamps = asyncHandler( async(req, res, next ) => {
     .json( { success: true, count: bootcamps.length, data: bootcamps });
 });
 ```
+
+# 5. Mongoose Middleware & Slugify
+
 
 
 
