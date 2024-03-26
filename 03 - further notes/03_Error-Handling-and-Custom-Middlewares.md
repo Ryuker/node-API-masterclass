@@ -66,3 +66,6 @@ res.status(err.statusCode || 500).json({
 next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404));
 ```
 
+# 3. Mongoose Error Handling [1]
+
+

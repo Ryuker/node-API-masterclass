@@ -31,7 +31,8 @@ exports.getBootcamp = async (req, res, next ) => {
       .json( { success: true, data: bootcamp });
 
   } catch (err) {
-    next(new ErrorResponse(`Bootcamp id is not formatted properly - id: ${req.params.id}`, 404));
+    // next(new ErrorResponse(`Bootcamp id is not formatted properly - id: ${req.params.id}`, 404));
+    next(err);
   }
 };
 
