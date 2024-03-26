@@ -66,7 +66,9 @@ res.status(err.statusCode || 500).json({
 next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404));
 ```
 
-# 3. Mongoose Error Handling [1]
+# 3. Mongoose Error Handling
+
+## Cast Error Handling by Name
 - modified `error.js` to handle `CastErrors`
   - for this we make a copy of the error, and set it's message to the original err message.
   ``` JS
@@ -88,5 +90,18 @@ next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404));
 
 - did this for all the routeHandlers
   - Also made sure to send a custom response where the ID format does match but isn't in the database. 
-  
-ha
+
+## Duplicate Key Error handling by Code
+- this returns a `MongoError` but this is used for multiple error
+  - instead we need to check for the error code key - `11000`
+``` JS 
+// Mongoose duplicate key
+if (err.code === 11000) {
+  console.log(err);
+  const message = `Duplicate field value entered - ${err.keyValue.name}`;
+  error = new ErrorResponse(message, 400);
+}
+```
+
+## Validation Error Handling
+

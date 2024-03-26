@@ -13,6 +13,13 @@ const errorHandler = (err, req, res, next) => {
     const message = `Bootcamp id is not formatted properly - id: ${err.value}`;
     error = new ErrorResponse(message, 404);
   }
+
+  // Mongoose duplicate key
+  if (err.code === 11000) {
+    console.log(err);
+    const message = `Duplicate field value entered - ${err.keyValue.name}`;
+    error = new ErrorResponse(message, 400);
+  }
   
   res.status(error.statusCode || 500).json({
     success: false,
