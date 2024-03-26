@@ -23,3 +23,13 @@ const errorHandler = (err, req, res, next) => {
 
 module.exports = errorHandler;
 ```
+
+## Using the Error Handler Middleware
+- we need to import it into `server.js`
+- we then have to use it after the routs middleware is specified
+  - else it won't catch the error
+``` JS server.js
+~~~ Route Middleware ~~~
+// - Error Handler
+app.use(errorHandler);
+```
