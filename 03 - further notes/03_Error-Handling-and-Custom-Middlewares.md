@@ -33,3 +33,19 @@ module.exports = errorHandler;
 // - Error Handler
 app.use(errorHandler);
 ```
+
+# 2. Custom ErrorResponse Class
+- We added a `utils` folder in the project root
+- Added `errorResponse.js`
+- Added a custom class that extends Error.
+  - code below is basic
+``` JS errorResponse.js
+class ErrorResponse extends Error {
+  constructor(message, statusCode) {
+    super(message);
+    this.statusCode = statusCode;
+  }
+}
+
+module.exports = ErrorResponse;
+```
