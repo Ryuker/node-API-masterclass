@@ -89,3 +89,4 @@ next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404));
 - did this for all the routeHandlers
   - Also made sure to send a custom response where the ID format does match but isn't in the database. 
   
+ha
