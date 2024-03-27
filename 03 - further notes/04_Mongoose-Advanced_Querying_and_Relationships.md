@@ -67,3 +67,7 @@ if (process.argv[2] === '-i') {
   deleteData();
 }
 ```
+
+# 2. Get Bootcamps Within Radius Loading...
+[GEOJSON Explanation](https://geojson.org/)
+- 
