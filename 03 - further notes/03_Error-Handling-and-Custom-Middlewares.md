@@ -157,7 +157,7 @@ npm i slugify
 - add `pre` middleware below the schema
   - we want to run before `save` so we specify that.
   - but we use a regular function as callback because arrow functions handle the scope of `this` differently.
-``` JS controlles/bootcamps
+``` JS controllers/bootcamps
 ~~~ Schema ~~~~
 // Create bootcamp slug from the name
 BootcampSchema.pre('save', function(next) {
@@ -165,6 +165,9 @@ BootcampSchema.pre('save', function(next) {
   next();
 });
 ```
+
+# 6. GeoJSON Location & Geocoder Hook
+
 
 
 
