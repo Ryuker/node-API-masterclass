@@ -136,6 +136,16 @@ exports.getBootcamps = asyncHandler( async(req, res, next ) => {
 ```
 
 # 5. Mongoose Middleware & Slugify
+[documentation](https://mongoosejs.com/docs/middleware.html#types-of-middleware)
+- moongoose has 4 types of middleware
+  - document middleware: manipulates the document 
+  - model middleware:
+  - aggregate middleware:
+  - query middleware:
+
+- You also have `Post` and `Pre` middleware, pre runs before and post runs after. 
+
+
 
 
 
