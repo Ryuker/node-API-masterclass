@@ -1,6 +1,10 @@
 # Error Handing & Custom Middlewares notes
 [Express Error Handling Page](https://expressjs.com/en/guide/error-handling.html)
 
+for reference:
+- free maps: [leaflet](https://leafletjs.com/)
+- free location data: [openstreetmap](https://wiki.openstreetmap.org/wiki/API_v0.6#URL_+_authentication)
+
 # 1. Error Handler Middleware
 - bit a tricky explanation on the above page but
   - to have Express handle errors in a non default way we have to call `next()` with the error
@@ -170,6 +174,8 @@ BootcampSchema.pre('save', function(next) {
 [package website](https://nchaulet.github.io/node-geocoder/)
 - the course uses a website called mapquest but this is payed.
   - I'm not using it for now. Might be able to get it from a different free service instead.
+    - this is a free alternative to get the - [github package](https://github.com/thundermiracle/geocoder-free)
+    - using [openstreetmap](https://wiki.openstreetmap.org/wiki/API_v0.6#URL_+_authentication) doesn't require any account
 - to install node-geocoder
 ``` JS Terminal
 npm i node-geocoder
@@ -195,6 +201,34 @@ const options = {
 const geocoder = NodeGeocoder(options);
 
 module.exports = geocoder;
+```
+
+- in the Bootcamp model 
+  - added the code to get the location with node-geocoder 
+  - and then set location using the longitude and latitude
+    - this is the only thing we would be using the Mapquest api access for, 
+      - I think we can replace this with gettingt the data from googlemaps using geocoder free
+      - for now I'm having it use `openstreetmap` instead since that doesn't require an account not a package
+``` JS
+// Geocode & create location field
+BootcampSchema.pre('save', async function(next){
+  const loc = await geocoder.geocode(this.address);
+  
+  this.location = {
+    type: 'Point',
+    coordinates: [loc[0].latitude, loc[0].longitude],
+    formattedAddress: loc[0].formattedAddress,
+    street: loc[0].streetName,
+    city: loc[0].city,
+    state: loc[0].stateCode,
+    zipcode: loc[0].zipcode,
+    country: loc[0].countryCode,
+  }
+
+  // Do not save adress
+  this.adress = undefined;
+  next();
+});
 ```
 
 
