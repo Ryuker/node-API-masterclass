@@ -175,6 +175,31 @@ BootcampSchema.pre('save', function(next) {
 npm i node-geocoder
 ```
 
+- In the `Bootcamp.js` model added
+``` JS 
+~~~ schema ~~~
+// Geocode & create location field
+```
+
+- added `geocoder.js` to the utils folder
+``` JS geocoder.js
+const nodeGeocoder = require('node-geocoder');
+
+const options = {
+  provider: process.env.GEOCODER_PROVIDER,
+  httpAdapter: 'https',
+  apiKey: process.env.GEOCODER_API_KEY,
+  formatter: null
+}
+
+const geocoder = NodeGeocoder(options);
+
+module.exports = geocoder;
+```
+
+
+
+
 
 
 
