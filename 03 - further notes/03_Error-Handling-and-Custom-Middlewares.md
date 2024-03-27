@@ -167,6 +167,14 @@ BootcampSchema.pre('save', function(next) {
 ```
 
 # 6. GeoJSON Location & Geocoder Hook
+[package website](https://nchaulet.github.io/node-geocoder/)
+- the course uses a website called mapquest but this is payed.
+  - I'm not using it for now. Might be able to get it from a different free service instead.
+- to install node-geocoder
+``` JS Terminal
+npm i node-geocoder
+```
+
 
 
 
