@@ -110,3 +110,5 @@ router
   .route('/radius/:zipcode/:distance')
   .get(getBootcampsInRadius);
 ```
+
+# 3. Advanced Filtering
