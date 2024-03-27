@@ -70,4 +70,43 @@ if (process.argv[2] === '-i') {
 
 # 2. Get Bootcamps Within Radius Loading...
 [GEOJSON Explanation](https://geojson.org/)
-- 
+- Added new controller method to getBootcamps within a radius
+  - it's pretty easy to follow along with.
+``` JS controllers/bootcamps.js
+// @desc    Get bootcamps within a radius
+// @route   GET /api/v1/bootcamps/radius/:zipcode/:distance
+// @access  Private
+exports.getBootcampsInRadius = asyncHandler(async (req, res, next ) => {
+  const { zipcode, distance } = req.params;
+
+  // Get lat/lng from geocoder
+  const loc = await geocoder.geocode(zipcode);
+  const lat = loc[0].latitude;
+  const lng = loc[0].longitude;
+
+  // Calc radius using radians
+  // Divide distance by radius of Earth
+  // Eart Radius = 3,963 miles / 6,378 km
+  const radius = distance / 3963;
+
+  const bootcamps = await Bootcamp.find({
+    location: { $geoWithin: { $centerSphere: [ [ lng, lat], radius ] } }
+  });
+
+  res.status(200).json({
+    success: true,
+    count: bootcamps.length,
+    data: bootcamps
+  });
+
+});
+```
+
+- Added the new route to `routes/bootcamps.js` 
+  - imported getBootCampsInRadius at the top.
+``` JS routes/bootcamps.js
+// All items within radius
+router 
+  .route('/radius/:zipcode/:distance')
+  .get(getBootcampsInRadius);
+```
