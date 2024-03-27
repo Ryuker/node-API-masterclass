@@ -145,6 +145,29 @@ exports.getBootcamps = asyncHandler( async(req, res, next ) => {
 
 - You also have `Post` and `Pre` middleware, pre runs before and post runs after. 
 
+## Adding Slugify package
+- generates SEO friendly URLS - [website](https://slugify.online/)
+- to install:
+``` JS Terminal
+npm i slugify
+```
+
+## Using Slugify in Pre middleware to generate slug
+- import into the controller (or any other place we want to use the middleware)
+- add `pre` middleware below the schema
+  - we want to run before `save` so we specify that.
+  - but we use a regular function as callback because arrow functions handle the scope of `this` differently.
+``` JS controlles/bootcamps
+~~~ Schema ~~~~
+// Create bootcamp slug from the name
+BootcampSchema.pre('save', function(next) {
+  this.slug = slugify(this.name, { lower: true });
+  next();
+});
+```
+
+
+
 
 
 
