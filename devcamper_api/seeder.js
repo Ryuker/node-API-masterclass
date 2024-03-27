@@ -1,23 +1,3 @@
-# Mongoose Advanced Querying & Relationships notes
-
-# 1. Database Seeder for Bootcamps
-- added `seeder.js` to the root
-- this is used to load data from the data folder and send it to the database
-  - we use this to quickly add and delete the data
-  - it uses mongoose and the Bootcamp model so the Slugify and Geocoder run in the model middleware. 
-    - So the database entries match what we would have if we submitted a request from Postmand/any client.
-- We call this file in the Terminal with 
-**to add all the database entries**
-``` JS Terminal
-node seeder -i
-```
-**to delete all the database entries**
-``` JS Terminal
-node seeder -d
-```
-
-
-``` JS seeder.js
 const fs = require('fs');
 const mongoose = require('mongoose');
 const colors = require('colors');
@@ -66,4 +46,5 @@ if (process.argv[2] === '-i') {
 } else if (process.argv[2] === '-d') {
   deleteData();
 }
-```
+
+
