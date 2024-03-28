@@ -112,3 +112,28 @@ router
 ```
 
 # 3. Advanced Filtering
+- in the client we can send the following query parameters in the url for example
+  `?averageCost[lte]=10000` - returns everything that has an average cost of 10000 or lower
+  `?averageCost[gte]=10000&location.city=Boston` - returns everything that has cost greater than 1000 and is in Boston
+  `?careers[in]=Business` - returns everything that has Business in the careers array
+
+- `req.query` gives us the query we receive from the client as an object
+  - so we `JSON.stringify` this to edit it as a string
+- We can modify the query string using `.replace` with Regular Expressions
+  - regular expressions are specified within `//g`
+    `/\b(gt|gte|lte|in)\b/g`
+  - `gt:` greater than | `gte:` greater than or equal to | `lte:` less then or equal to | `in:` equals value inside the array
+  - we need to put a `$` at the front of the key name
+  - we then parse the query string with JSON.parse to an object and then await the query.
+
+``` JS controllers/bootcamps.js
+~~~ inside the getBootcamps handler ~~~
+let query;
+let queryStr = JSON.stringify(req.query);
+
+queryStr = queryStr.replace(/\b(gt|gte|lte|in)\b/g, match => `$${match}`);
+
+query = Bootcamp.find(JSON.parse(queryStr));
+
+const bootcamps = await query;
+```
