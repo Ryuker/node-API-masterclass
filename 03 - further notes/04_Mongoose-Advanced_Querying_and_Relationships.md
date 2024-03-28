@@ -244,5 +244,8 @@ if (startIndex > 0) {
 - we then return `pagination` as a field in our status object.
 `{ success: true, count: bootcamps.length, pagination, data: bootcamps }`
 
+# 6. Course Model & Seeding
+
+
 
 
