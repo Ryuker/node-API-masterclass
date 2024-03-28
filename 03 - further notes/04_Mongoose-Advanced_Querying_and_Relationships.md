@@ -199,3 +199,21 @@ if (req.query.sort) {
 }
 ```
 
+# 5. Adding Pagination
+query params: `?page=4&limit=1&select=name`
+- added `page` and `limit` as fields to exclude
+- used `parseInt()` to convert the page value from string to integer and set a default value
+- added a skip variable in which we subtract one from the page and multpli the result by the limit
+- we then add the `skip` and `limit` fields to the query
+``` JS controllers/bootcamps.js
+~~~~ Sort Check ~~~~
+// Pagination
+const page = parseInt(req.query.page, 10) || 1;
+const limit = parseInt(req.query.limit, 10) || 100;
+const skip = (page - 1) * limit;
+
+query = query.skip(skip).limit(limit); 
+```
+
+
+
