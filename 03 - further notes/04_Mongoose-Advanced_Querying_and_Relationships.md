@@ -176,3 +176,26 @@ if(req.query.select) {
 }
 ```
 
+## Adding Sorting
+- Very similar
+  - example of a query `?select=name,description,housing&sort=-name`
+    - `-name` sorts in descending order, positive sorts in ascending order
+- We add `sort` as field to exclude
+``` JS controller/bootcamps.js
+// Fields to exclude
+const removeFields = ['select', 'sort'];
+```
+- then we add a similar if check below the `select fields` check
+``` JS controller/bootcamps.js
+~~~ Select Fields Condition ~~~
+
+// Sort
+if (req.query.sort) {
+  const sortBy = req.query.sort.split(',').join(' ');
+  query = query.sort(sortBy);
+} else {
+  // Default
+  query = query.sort('-createdAt');
+}
+```
+
