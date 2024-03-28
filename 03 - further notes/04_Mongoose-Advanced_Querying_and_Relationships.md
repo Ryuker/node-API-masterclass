@@ -137,3 +137,42 @@ query = Bootcamp.find(JSON.parse(queryStr));
 
 const bootcamps = await query;
 ```
+
+# 4. Select & Sorting
+- supporting select (filters so we only gets the params specified in the request and the id)
+  `?select=name,description,housing`
+- to support this we copy the req.query object using `...` and then remove the value from the select field
+  - we do this using a remove fields array, in this we specify what fields to exclude
+    - we then `.forEach` over this array and remove each param `param => delete reqQuery[param]` 
+  - we use this array to check 
+  - we then get use an if check to see if the select is inside the original request.
+    - if it is we copy the field value into a new variable 
+    - with  `,` replaced by ` `, this is to mongoDB requirements
+    - we then set the select key to the new field value
+
+``` JS controllers/bootcamps.js
+// Copy req.query
+const reqQuery = {...req.query};
+
+// Fields to exclude
+const removeFields = ['select'];
+
+// Loop over removeFields and delete them from reqQuery
+removeFields.forEach(param => delete reqQuery[param]);
+
+// Create query string
+let queryStr = JSON.stringify(reqQuery);
+
+// Create operators ($gt, $gte, etc) 
+queryStr = queryStr.replace(/\b(gt|gte|lte|in)\b/g, match => `$${match}`);
+
+// Finding resource
+query = Bootcamp.find(JSON.parse(queryStr));
+
+// Select fields
+if(req.query.select) {
+  const fields = req.query.select.split(',').join(' ');
+  query = query.select(fields);
+}
+```
+
