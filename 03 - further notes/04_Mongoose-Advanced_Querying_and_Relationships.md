@@ -203,17 +203,46 @@ if (req.query.sort) {
 query params: `?page=4&limit=1&select=name`
 - added `page` and `limit` as fields to exclude
 - used `parseInt()` to convert the page value from string to integer and set a default value
-- added a skip variable in which we subtract one from the page and multpli the result by the limit
-- we then add the `skip` and `limit` fields to the query
+- added a startIndex variable in which we subtract one from the page and multpli the result by the limit
+- we then add the `skip(startIndex)`  and `limit(limit)` fields to the query
 ``` JS controllers/bootcamps.js
 ~~~~ Sort Check ~~~~
 // Pagination
 const page = parseInt(req.query.page, 10) || 1;
 const limit = parseInt(req.query.limit, 10) || 100;
-const skip = (page - 1) * limit;
+const startIndex = (page - 1) * limit;
 
-query = query.skip(skip).limit(limit); 
+query = query.skip(startIndex).limit(limit); 
 ```
+
+## Adding Pagination field
+- this is to display in the client
+- we the following constants 
+``` JS controllers/bootcamps.js
+const endIndex = page * limit;
+const total = await Bootcamp.countDocuments();
+```
+- then we create an empty pagination object and populate it with a `next` and `prev` field
+``` JS controllers/bootcamps.js
+// Pagination result
+const pagination = {};
+
+if(endIndex < total) {
+  pagination.next = {
+    page: page + 1,
+    limit
+  }
+}
+
+if (startIndex > 0) {
+  pagination.prev = {
+    page: page -1,
+    limit
+  }
+}
+```
+- we then return `pagination` as a field in our status object.
+`{ success: true, count: bootcamps.length, pagination, data: bootcamps }`
 
 
 
