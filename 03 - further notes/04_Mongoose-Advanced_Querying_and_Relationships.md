@@ -305,6 +305,22 @@ module.exports = router;
 ```
 - We then specify in `server.js` that we need to use the courses middleware like was done with bootcamps
 
+## Setting a resource router to handle relations between database entries
+- in `routes/bootcamps` we reroute to the course router based on the route
+``` JS routes/bootcamps.js
+// Include other resource routers
+const courseRouter = require('./courses');
+
+~~~ Router instantiation ~~~
+
+// Re-route into other resource routers
+router.use('/:bootcampId/courses', courseRouter);
+```
+- For this to work we have to merge the url params in the `courses` router
+``` JS routes/courses.js
+const router = express.Router({ mergeParams: true });
+```
+
 
 
 
