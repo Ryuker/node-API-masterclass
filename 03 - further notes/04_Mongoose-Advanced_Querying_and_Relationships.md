@@ -303,8 +303,7 @@ router
 
 module.exports = router;
 ```
-
-
+- We then specify in `server.js` that we need to use the courses middleware like was done with bootcamps
 
 
 
