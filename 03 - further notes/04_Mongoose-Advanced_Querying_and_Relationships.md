@@ -286,6 +286,29 @@ exports.getCourses = asyncHandler(async (req, res, next) => {
 });
 ```
 
+- Added a route file for the courses, `routes/courses.js`
+  - in this we destructure the `getCourses` handler from the controller
+  - we then specify the route and which handler to use.
+``` JS routes/courses.js
+const express = require('express');
+const { 
+  getCourses
+} = require('../controllers/courses');
+
+const router = express.Router();
+
+router
+  .route('/')
+  .get(getCourses);
+
+module.exports = router;
+```
+
+
+
+
+
+
 
 
 
