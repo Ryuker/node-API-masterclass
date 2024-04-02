@@ -321,6 +321,9 @@ router.use('/:bootcampId/courses', courseRouter);
 const router = express.Router({ mergeParams: true });
 ```
 
+# 8. Populate, Virtuals & Cascade
+
+
 
 
 
