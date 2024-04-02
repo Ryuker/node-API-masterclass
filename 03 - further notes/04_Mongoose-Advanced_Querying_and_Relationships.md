@@ -245,6 +245,18 @@ if (startIndex > 0) {
 `{ success: true, count: bootcamps.length, pagination, data: bootcamps }`
 
 # 6. Course Model & Seeding
+- `Courses` are related to `bootcamps`
+  - to specify a relationship we need to have a type of the ObjectId
+    - this is a property on `mongoose.Schema`
+    - we also need to specify a ref field.
+``` JS models/course.js
+  bootcamp: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Bootcamp',
+    required: true
+  }
+```
+
 
 
 
