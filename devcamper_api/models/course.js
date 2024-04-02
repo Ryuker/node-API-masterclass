@@ -25,11 +25,11 @@ const CourseSchema = new mongoose.Schema({
   },
   scholarshipAvailable: {
     type: Boolean, 
-    required: false
+    default: false
   },
   createdAt: {
     type: Date, 
-    required: Date.now
+    default: Date.now
   },
   bootcamp: {
     type: mongoose.Schema.ObjectId,
