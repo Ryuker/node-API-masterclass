@@ -259,6 +259,33 @@ if (startIndex > 0) {
 
 ## Add Bootcamp to the Seeder
 
+# 7. Courses Routes & Controller
+- Added route controller with basic route to get all courses or by bootcamp id
+  - both of these are the same route
+``` JS controllers/courses.js
+// @desc    Get courses
+// @route   GET /api/v1/courses
+// @route   GET /api/v1/bootcamps/:bootcampId/courses
+// @access  Public
+exports.getCourses = asyncHandler(async (req, res, next) => {
+  let query;
+
+  if(req.params.bootcampId) {
+    query = Course.find({ bootcamp: req.params.bootcampId });
+  } else {
+    query = Course.find();
+  }
+
+  const courses = await query;
+
+  res.status(200).json({
+    success: true, 
+    count: courses.length,
+    data: courses
+  })
+});
+```
+
 
 
 
