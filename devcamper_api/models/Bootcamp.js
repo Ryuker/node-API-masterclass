@@ -104,6 +104,9 @@ const BootcampSchema = new mongoose.Schema({
 BootcampSchema.pre('save', function(next) {
   this.slug = slugify(this.name, { lower: true });
   next();
+}, {
+  toJSON: { virtual: true },
+  toObject: { virtuals: true}
 });
 
 // Geocode & create location field
@@ -126,5 +129,12 @@ BootcampSchema.pre('save', async function(next){
   next();
 });
 
+// Reverse populate with virtuals
+BootcampSchema.virtual('courses', {
+  ref: 'Course',
+  localField: '_id',
+  foreignField: 'bootcamp',
+  justOne: false
+});
 
 module.exports = mongoose.model('Bootcamp', BootcampSchema);

@@ -336,6 +336,32 @@ query = Course.find().populate({
 ```
 
 ## Virtuals
+[documentation](https://mongoosejs.com/docs/guide.html#virtuals)
+- Virtuals allow you to specify getters in the schema, this way you can formal strings when accessing a field while this doesn't get added to the database. 
+  - so it's just on the schema.
+
+- To use them we have to add an object after the schema object
+``` JS models/bootcamps.js
+({ ~~~schema~~ }, {
+  toJSON: { virtual: true },
+  toObject: { virtuals: true}
+});
+```
+
+- Adding reverse populate with virtuals
+``` JS models/bootcamps.js
+// Reverse populate with virtuals
+BootcampSchema.virtual('courses', {
+  ref: 'Course',
+  localField: '_id',
+  foreignField: 'bootcamp',
+  justOne: false
+});
+
+~~~ module exports ~~~
+```
+
+
 
 
 
