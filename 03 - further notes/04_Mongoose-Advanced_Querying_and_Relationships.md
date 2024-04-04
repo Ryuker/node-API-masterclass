@@ -373,21 +373,21 @@ query = Bootcamp.find(JSON.parse(queryStr)).populate('courses');
   - this has to to run `pre` because the bootcamp still need to be available when deleting the courses
 ``` JS models/bootcamps.js
 // Cascade delete courses when a bootcamp is deleted
-BootcampSchema.pre('remove', async function(next) {
+BootcampSchema.pre('deleteOne', async function(next) {
   console.log(`Courses being removed from bootcamp ${this._id}`);
   await this.model('Course').deleteMany({ bootcamp: this._id });
   next();
 });
 ```
 - For the above to work we need to modify how we delete a bootcamp in the bootcamp controller
-  - `findByIdAndDelete()` won't trigger the middleware since we are running the middleware pre `'remove'`, so we change it to findById
-  - then below the error handling we call `bootcamp.remove()`, this call does trigger the middleware
+  - `findByIdAndDelete()` won't trigger the middleware since we are running the middleware pre `'deleteOne'`, so we change it to findById
+  - then below the error handling we call `bootcamp.deleteOne()`, this call does trigger the middleware
 ``` JS controllers/bootcamps.js
 const bootcamp = await Bootcamp.findById(req.params.id);
 
 ~~ Error Handling ~~
 
-bootcamp.remove(); // Triggers the middleware
+await bootcamp.deleteOne(); // Triggers the middleware
 ```
 
 
