@@ -343,7 +343,7 @@ query = Course.find().populate({
 - To use them we have to add an object after the schema object
 ``` JS models/bootcamps.js
 ({ ~~~schema~~ }, {
-  toJSON: { virtual: true },
+  toJSON: { virtuals: true },
   toObject: { virtuals: true}
 });
 ```
@@ -360,6 +360,14 @@ BootcampSchema.virtual('courses', {
 
 ~~~ module exports ~~~
 ```
+- add populate in bootcamps controller
+``` JS controllers/bootcamps.js
+// Finding resource
+query = Bootcamp.find(JSON.parse(queryStr)).populate('courses');
+```
+  - This allows us to reverse populate all the courses in an array in a /bootcamps request
+
+
 
 
 
