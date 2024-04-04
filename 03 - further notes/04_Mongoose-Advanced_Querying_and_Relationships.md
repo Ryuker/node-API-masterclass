@@ -326,6 +326,19 @@ const router = express.Router({ mergeParams: true });
 ## Populate course results with associated bootcamps
 - We can call `Course.find().populate('bootcamp')` to also return the bootcamp data from the `/courses` query
 
+## Filtering fields to return
+- We can also pass an object into `populate()`, this way we can pass which fields to return
+``` JS controllers/courses.js
+query = Course.find().populate({
+  path: 'bootcamp',
+  select: 'name description'
+});
+```
+
+## Virtuals
+
+
+
 
 
 
