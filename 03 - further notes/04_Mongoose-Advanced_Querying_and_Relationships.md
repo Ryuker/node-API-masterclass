@@ -323,6 +323,9 @@ const router = express.Router({ mergeParams: true });
 
 # 8. Populate, Virtuals & Cascade
 
+## Populate course results with associated bootcamps
+- We can call `Course.find().populate('bootcamp')` to also return the bootcamp data from the `/courses` query
+
 
 
 
