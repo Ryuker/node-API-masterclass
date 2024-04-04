@@ -390,6 +390,28 @@ const bootcamp = await Bootcamp.findById(req.params.id);
 await bootcamp.deleteOne(); // Triggers the middleware
 ```
 
+# 9. Single Course & Add Course
+- added a handler for getting a single course
+``` JS controllers/courses.js
+// @desc    Get single course
+// @route   GET /api/v1/courses/:id
+// @access  Public
+exports.getCourse = asyncHandler(async (req, res, next) => {
+  const course = await Course.findById(req.params.id).populate({
+    path: 'bootcamp',
+    select: 'name description'
+  });
+
+  if (!course) {
+    return next(new ErrorResponse(`No course with the id of ${req.params.id}`), 404);
+  };
+
+  res.status(200).json({
+    success: true, 
+    data: course
+  })
+});
+``` 
 
 
 
