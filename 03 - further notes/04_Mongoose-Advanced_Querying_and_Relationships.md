@@ -449,6 +449,12 @@ exports.addCourse = asyncHandler(async (req, res, next) => {
   })
 });
 ```
+- then chained a .post in `routes/courses.js` on the `/` route
+``` JS routes/courses.js
+.post(addCourse);
+```
+
+
 
 
 
