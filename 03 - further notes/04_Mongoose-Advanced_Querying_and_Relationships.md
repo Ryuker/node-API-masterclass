@@ -420,6 +420,37 @@ router
 .get(getCourse);
 ```
 
+## Adding a course
+- Added a POST handler in `controllers/courses.js`for this
+  - it's a bit different then the POST handler for the bootcamps. 
+    - this is because we associate the course by bootcamp.
+    - so for this request:
+      - we specify the bootcamp id in the request
+      - we check if that bootcamp exists
+      - if it does we add a course
+``` JS controllers/courses.js
+// @desc    Add course
+// @route   POST /api/v1/bootcamps/:bootcampId/courses
+// @access  Private
+exports.addCourse = asyncHandler(async (req, res, next) => {
+  req.body.bootcamp = req.params.bootcampId;
+
+  const bootcamp = await Bootcamp.findById(req.params.bootcampId);
+
+  if (!bootcamp) {
+    return next(new ErrorResponse(`No bootcamp with the id of ${req.params.bootcampId}`), 404);
+  };
+
+  const course = await Course.create(req.body);
+
+  res.status(200).json({
+    success: true, 
+    data: course
+  })
+});
+```
+
+
 
 
 
