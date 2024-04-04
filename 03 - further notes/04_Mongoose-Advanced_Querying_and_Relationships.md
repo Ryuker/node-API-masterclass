@@ -412,6 +412,14 @@ exports.getCourse = asyncHandler(async (req, res, next) => {
   })
 });
 ``` 
+- then added a route for it in `routes/courses.js`
+``` JS routes/courses.js
+// Single course
+router
+.route('/:id')
+.get(getCourse);
+```
+
 
 
 
