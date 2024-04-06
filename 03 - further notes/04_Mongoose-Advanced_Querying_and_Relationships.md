@@ -503,6 +503,8 @@ exports.deleteCourse = asyncHandler(async (req, res, next) => {
 ```
 - then added the route
 
+# 9. Calculating Averagge Cost with Aggregate 
+- 03:08 
 
 
 
