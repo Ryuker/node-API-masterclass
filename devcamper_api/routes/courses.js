@@ -16,8 +16,8 @@ router
 
 // Single course
 router
-.route('/:id')
-.get(getCourse)
-.put(updateCourse);
+  .route('/:id')
+  .get(getCourse)
+  .put(updateCourse);
 
 module.exports = router;
