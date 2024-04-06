@@ -454,7 +454,32 @@ exports.addCourse = asyncHandler(async (req, res, next) => {
 .post(addCourse);
 ```
 
+# 8.Update & Delete Course
 
+## Update
+``` JS controllers/courses.js
+// @desc    Update course
+// @route   PUT /api/v1/courses/:id
+// @access  Private
+exports.updateCourse = asyncHandler(async (req, res, next) => {
+  let course = await Course.findById(req.params.id);
+
+  if (!course) {
+    return next(new ErrorResponse(`No course found with the id of ${req.params.id}`), 404);
+  };
+
+  course = await Course.findByIdAndUpdate(re.params.id, req.body, {
+    new: true,
+    runValidators: true
+  });
+
+  res.status(200).json({
+    success: true, 
+    data: course
+  })
+});
+```
+- then added it to routes
 
 
 
