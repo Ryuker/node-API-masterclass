@@ -77,7 +77,7 @@ exports.updateCourse = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(`No course found with the id of ${req.params.id}`), 404);
   };
 
-  course = await Course.findByIdAndUpdate(re.params.id, req.body, {
+  course = await Course.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true
   });
