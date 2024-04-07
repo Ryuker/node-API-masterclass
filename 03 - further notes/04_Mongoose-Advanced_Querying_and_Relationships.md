@@ -551,6 +551,9 @@ CourseSchema.pre('deleteOne', {document: true, query: false }, function(){
 });
 ```
 
+# 10. Bootcamp Photo Upload
+
+
 
 
 
