@@ -504,7 +504,55 @@ exports.deleteCourse = asyncHandler(async (req, res, next) => {
 - then added the route
 
 # 9. Calculating Averagge Cost with Aggregate 
-- 03:08 
+- Mongoose static methods are called directly on the modell instead of on the model instance
+  - `Course.goFish()` - static method call
+  - `const courses = Course.find()` - method call on the model instance
+- we declare a static method in the following way
+  - `CourseSchema.statics.getAverageCost = async function(){};`
+
+- Average cost aggregation methods
+``` JS models/Course.js
+// Static method to get avg of course tuitions
+CourseSchema.statics.getAverageCost = async function(bootcampId){
+  console.log('Calculating avg costs...'.blue);
+
+  const obj = await this.aggregate([
+    {
+      $match: { bootcamp: bootcampId }
+    },
+    {
+      $group: {
+        _id: '$bootcamp',
+        averageCost: { $avg: '$tuition' }
+      }
+    }
+  ]);
+
+  try {
+    await this.model('Bootcamp').findByIdAndUpdate(bootcampId, {
+      averageCost: Math.ceil(obj[0].averageCost / 10) * 10
+    })
+  } catch (err) {
+    console.error(err);
+  }
+};
+```
+
+- called the method in pre and pos middleware
+``` JS courses/Course.js
+// Call getAverageCost after save
+CourseSchema.post('save', function(){
+  this.constructor.getAverageCost(this.bootcamp);
+});
+
+// Call getAverageCost before deleteOne
+CourseSchema.pre('deleteOne', {document: true, query: false }, function(){
+  this.constructor.getAverageCost(this.bootcamp);
+});
+```
+
+
+
 
 
 
