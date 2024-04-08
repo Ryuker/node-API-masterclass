@@ -552,6 +552,16 @@ CourseSchema.pre('deleteOne', {document: true, query: false }, function(){
 ```
 
 # 10. Bootcamp Photo Upload
+- For this we're using the `ExpressFileUpload` package
+  - [github repo](https://github.com/richardgirges/express-fileupload)
+  - this uploads an image to a folder where files are stored (so not in the database?)
+- To install:
+``` JS Terminal
+npm i express-fileupload
+```
+
+
+
 
 
 
