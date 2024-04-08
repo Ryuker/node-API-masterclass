@@ -563,8 +563,41 @@ npm i express-fileupload
 ``` JS server.js
 ~~~ other middleware ~~~
 // File uploading
-app.use(fileupload);
+app.use(fileupload());
 ```
+
+## Adding Image Upload handler and route
+- added image upload route
+  - added the route to routes/bootcamps
+- added the handler to the controller file 
+``` JS controllers/bootcamps.js
+// @desc    Upload photo for bootcamp
+// @route   PUT /api/v1/bootcamps/:id/photo
+// @access  Private
+exports.bootcampPhotoUpload = asyncHandler(async (req, res, next ) => {
+  const bootcamp = await Bootcamp.findById(req.params.id);
+  // Send 400 if the ID didn't return a result from the database
+  if (!bootcamp) {
+    return next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404));
+  }
+
+  if(!req.files) {
+    return next(new ErrorResponse('Please upload a file', 400));
+  }
+
+  const file = req.files.file;
+
+  // Make sure the image is a photo
+  if(!file.mimetype.startsWith('image')) {
+    return next(new ErrorResponse('Please upload an image file', 400));
+  }
+
+
+  res.status(200)
+    .json( { success: true, msg: `Uploaded photo to bootcamp with id ${req.params.id}` , data: bootcamp });
+});
+```
+-  We use the mimetype to check if the file we're receiving in the request is a file
 
 
 

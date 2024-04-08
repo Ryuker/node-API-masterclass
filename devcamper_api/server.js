@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === 'development'){
 }
 
 // File uploading
-app.use(fileupload);
+app.use(fileupload());
 
 // - Mount routers
 app.use('/api/v1/bootcamps', bootcamps);
