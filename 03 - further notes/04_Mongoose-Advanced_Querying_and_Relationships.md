@@ -559,6 +559,13 @@ CourseSchema.pre('deleteOne', {document: true, query: false }, function(){
 ``` JS Terminal
 npm i express-fileupload
 ```
+- then imported it into `server.js` and added as middleware
+``` JS server.js
+~~~ other middleware ~~~
+// File uploading
+app.use(fileupload);
+```
+
 
 
 
