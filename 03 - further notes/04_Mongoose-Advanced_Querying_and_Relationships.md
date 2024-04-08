@@ -725,6 +725,47 @@ const advancedResults = (model, populate) => async(req, res, next) => {
 
 module.exports = advancedResults;
 ```
+- to use the middleware on the routes we import it into `routes/bootcamps`
+``` JS routes/bootcamps
+const Bootcamp = require('../models/Bootcamp');
+
+const advancedResults = require('../middleware/advancedResults');
+
+router
+  .route('/')
+  .get(advancedResults(Bootcamp, 'courses'), getBootcamps)
+```
+- But we can import this into courses etc as well
+``` JS routes/courses.js
+const Course = require('../models/Course');
+const advancedResults = require('../middleware/advancedResults');
+
+// All courses
+router
+  .route('/')
+  .get(advancedResults(Course, {
+    path: 'bootcamp',
+    select: 'name description'
+  }), getCourses)
+```
+  - note that we pass an object into populate for courses instead
+
+- We then update the getCourses handler to send normal results or advanced query results
+``` JS controllers/courses.js
+exports.getCourses = asyncHandler(async (req, res, next) => {
+  if(req.params.bootcampId) {
+    const courses = await Course.find({ bootcamp: req.params.bootcampId });
+    
+    return res.status(200).json({
+      succes: true,
+      count: courses.length, 
+      data: courses
+    });
+  } else {
+    res.status(200).json(res.advancedResults);    
+  }
+});
+```
 
 
 
