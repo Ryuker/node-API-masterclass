@@ -592,12 +592,45 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next ) => {
     return next(new ErrorResponse('Please upload an image file', 400));
   }
 
+  // Check filesize
+  if(file.size > process.env.MAX_FILE_UPLOAD) {
+    return next(new ErrorResponse(`Please upload an image less than ${process.env.MAX_FILE_UPLOAD}`, 400));
+  }
 
-  res.status(200)
-    .json( { success: true, msg: `Uploaded photo to bootcamp with id ${req.params.id}` , data: bootcamp });
+  // Create custom filename
+  file.name = `photo_${bootcamp._id}${path.parse(file.name).ext}`;
+
+  file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async err => {
+    if (err) {
+      console.error(err);
+      return next(new ErrorResponse(`Problem with file upload`, 500));
+    }
+
+    await Bootcamp.findByIdAndUpdate(req.params.id, { photo: file.name });
+
+    res.status(200).json({
+      success: true,
+      data: file.name,
+      bootcamp: bootcamp
+    });
+  });
 });
 ```
--  We use the mimetype to check if the file we're receiving in the request is a file
+  -  We use the mimetype to check if the file we're receiving in the request is a file
+  -  We check the filesize to ensure we are within the max size
+  -  We then create a custom filename
+    - we do this so we know for sure we are saving a unique file name
+    - The tutorial change the filename to `photo_{bootcamp id number}`
+      - this works for the tutorial but won't work for multiple photos.
+    - for this we are using the path module which comes standard with express
+  -  We then call `file.mv` to add the file and send back either an error a or a success response
+
+- The file is uploaded to `public/uploads/`
+- To make this statically accessible in the browser we add the following to server.js
+``` JS server.js
+// Set static folder
+app.use(express.static(path.join(__dirname, 'public')));
+```
 
 
 
