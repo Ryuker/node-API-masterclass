@@ -136,6 +136,10 @@ UserSchema.methods.getSignedJwtToken = function() {
   res.status(200).json({ success: true, token, data: user });
 ```
 
+- The signed token we get back from a request we can use on `JWT.io` to check what it's made up off.
+  - we can then use this to get the proper id back etc.
+  
+
 
 
 
