@@ -110,6 +110,9 @@ UserSchema.pre('save', async function(next) {
 })
 ```
 
+# 3. Sign & Get JSON Web Token
+
+
 
 
 
