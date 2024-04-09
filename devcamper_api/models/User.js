@@ -1,14 +1,5 @@
-# Users Authentication & Permissions notes
+const mongoose = require('mongoose');
 
-# 1. User Model
-
-## Packages for token generation and encryption
-- JSON Webtoken - for webtokens- `npm i jsonwebtoken`
-- bcryptjs - to encrypt passwords - `npm i bcryptjs`
-
-## User Model
-- User schema to `models/User.js`
-``` JS models/Users.js
 const UserSchema = new mongoose.Schema({
   name: {
     type: String, 
@@ -41,8 +32,5 @@ const UserSchema = new mongoose.Schema({
     default: Date.now
   }
 });
-```
-- 
 
-
-
+module.exports = mongoose.model('User', UserSchema);
