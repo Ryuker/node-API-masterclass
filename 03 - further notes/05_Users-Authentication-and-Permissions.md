@@ -42,7 +42,9 @@ const UserSchema = new mongoose.Schema({
   }
 });
 ```
-- 
+
+## Authentication
+- We created `routes/auth.js` and `controllers/auth.js`
 
 
 
