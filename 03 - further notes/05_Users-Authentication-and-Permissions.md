@@ -79,6 +79,9 @@ const auth = require('./routes/auth');
 app.use('/api/v1/auth', auth);
 ```
 
+# 2. User Register & Password Encrypt
+
+
 
 
 
