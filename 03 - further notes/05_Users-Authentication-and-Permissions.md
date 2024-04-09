@@ -140,7 +140,51 @@ UserSchema.methods.getSignedJwtToken = function() {
   - we can then use this to get the proper id back etc.
 
 # 4. User Login
+- Added the following method to the `User` model
+``` JS models/User.js
+// Match user entered password to hashed password in database
+UserSchema.methods.matchPassword = async function(enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+}
+```
 
+- Added Login handler to `controllers/auth.js`
+  - In it we do some validation of the email and password
+    - it's important that the error response returns the same message, this way hackers can't identify if a user exists in the database or matches a password etc.
+
+``` JS controllers/auth.js
+// @desc    Login user
+// @route   POST /api/v1/auth/login
+// @access  Public
+exports.login = asyncHandler(async (req, res, next) => {
+  const { email, password } = req.body;
+
+  // Validate email & password
+  if (!email || !password){
+    return next(new ErrorResponse('Please provide a email and password', 400));
+  }
+
+  // Check for user
+  const user = await user.findOne({ email }).select('+password');
+
+  if(!user) {
+    return next(new ErrorResponse(`Invalid credentials`, 401));
+  }
+
+  // Check if password matches
+  const isMatch = await user.matchPassword(password);
+
+  if (!isMatch) {
+    return next(new ErrorResponse(`Invalid credentials`, 401));
+  }
+
+  // Create token
+  const token = user.getSignedJwtToken();
+
+
+  res.status(200).json({ success: true, token, data: user });
+});
+```
 
 
 
