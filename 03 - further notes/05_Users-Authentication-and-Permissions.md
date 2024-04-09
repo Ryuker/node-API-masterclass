@@ -191,6 +191,8 @@ exports.login = asyncHandler(async (req, res, next) => {
 router.post('/login', login);
 ```
 
+# 5. Sending JWT in a cookie
+
 
 
 
