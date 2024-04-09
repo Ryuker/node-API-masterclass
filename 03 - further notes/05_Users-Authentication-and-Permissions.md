@@ -46,5 +46,20 @@ const UserSchema = new mongoose.Schema({
 ## Authentication
 - We created `routes/auth.js` and `controllers/auth.js`
 
+- Added basic handler to return a register response
+``` JS controllers/auth.js
+const asyncHandler = require('../middleware/async');
+
+// @desc    Register user
+// @route   GET /api/v1/auth/register
+// @access  Public
+exports.register = asyncHandler(async (req, res, next) => {
+  res.status(200).json({ success: true});
+});
+```
+
+- Added 
+
+
 
 
