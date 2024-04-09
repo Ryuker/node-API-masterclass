@@ -63,11 +63,20 @@ exports.register = asyncHandler(async (req, res, next) => {
 const express = require('express');
 const { register } = require('../controllers/auth');
 
-const router = express.router();
+const router = express.Router();
 
 router.post('/register', register);
 
 module.exports = router;
+```
+
+- Made sure to add the auth route middleware to `server.js`
+``` JS server.js
+// Route files
+const auth = require('./routes/auth');
+
+// - Mount routers
+app.use('/api/v1/auth', auth);
 ```
 
 
