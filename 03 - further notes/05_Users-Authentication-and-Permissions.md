@@ -138,8 +138,8 @@ UserSchema.methods.getSignedJwtToken = function() {
 
 - The signed token we get back from a request we can use on `JWT.io` to check what it's made up off.
   - we can then use this to get the proper id back etc.
-  
 
+# 4. User Login
 
 
 
