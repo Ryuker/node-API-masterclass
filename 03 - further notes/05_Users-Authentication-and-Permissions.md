@@ -111,6 +111,32 @@ UserSchema.pre('save', async function(next) {
 ```
 
 # 3. Sign & Get JSON Web Token
+[JWT Website](https://jwt.io/)
+- Added JWT signing to `User` model
+``` JS models/User.js
+const jwt = require('jsonwebtoken');
+
+~~~ Below encrypt middlware ~~~
+// Sign JWT and return
+UserSchema.methods.getSignedJwtToken = function() {
+    return jwt.sign(
+      { id: this._id }, 
+      process.env.JWT_SECRET, 
+      { expiresIn: process.env.JWT_EXPIRE}
+    );
+};
+```
+- added env variables for the secret and expiration.
+
+- Modified register handler to get the token using the above method we just added on the model
+``` JS controllers/auth.js
+// Create token
+  const token = user.getSignedJwtToken();
+
+  res.status(200).json({ success: true, token, data: user });
+```
+
+
 
 
 
