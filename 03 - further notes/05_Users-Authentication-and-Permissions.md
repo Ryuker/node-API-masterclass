@@ -80,6 +80,8 @@ app.use('/api/v1/auth', auth);
 ```
 
 # 2. User Register & Password Encrypt
+
+## Creating the User
 - Modified register handler to create a new user
 ``` JS controlles/auth
 exports.register = asyncHandler(async (req, res, next) => {
@@ -96,6 +98,21 @@ exports.register = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, data: user });
 });
 ```
+
+## Encryption using bcryptjs
+- In `models/User.js` we import bycryptjs and then add the following pre middleware below the schema
+  - the below is very secure according to this course
+``` JS models/Users.js
+// Encrypt password using bcrypt
+UserSchema.pre('save', async function(next) {
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+})
+```
+
+
+
+
 
 
 
