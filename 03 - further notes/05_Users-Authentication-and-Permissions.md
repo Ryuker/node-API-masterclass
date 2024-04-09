@@ -185,6 +185,11 @@ exports.login = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, token, data: user });
 });
 ```
+- Added the login route to `routes/auth.js`
+``` JS routes/auth.js
+// Login
+router.post('/login', login);
+```
 
 
 
