@@ -300,6 +300,37 @@ const { protect } = require('../middleware/auth');
 
 - We do this for both bootcamps and courses
 
+## Getting the current logged in user
+- added `getMe` handler to `controllers/auth.js`
+  - this can access the `user` field on the request since we've added that in the protect method from the authentication check
+``` JS controllers/auth.js
+// @desc    Get current logged in user
+// @route   GET /api/v1/auth/me
+// @access  Private
+exports.getMe = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+  res.status(200).json({
+    success: true,
+    data: user
+  })
+});
+```
+- We then add the route for /me to `routes/auth.js`
+  - it's important that we run the protect middleware on the route before the getMe method.
+    - else we won't have access to the user since it won't be on the request.
+``` JS routes/auth.js
+~~~ Below router declaration ~~~
+const { protect } = require('../middleware/auth');
+
+// Me
+router.get('/me', protect, getMe);
+```
+
+# Storing The Token in Postman
+
+
+
+
 
 
 
