@@ -202,6 +202,31 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 ```
 
+## Creating the cookie
+- added a method `sendTokenResponse` in `controllers/auth.js` to create the cookie
+  - to modify the cookie expire added a JWT_COOKIE_EXPIRE variable to the .env file
+    - we use this to calculate the expiration date from the current date.
+        - we need to multiply it by `* 24 * 60 * 60 * 1000` to get the proper date
+``` JS controllers/auth.js
+// Get token from model, create cookie and send response
+const sendTokenResponse = (user, statusCode, res) => {
+  // Create token
+  const token = user.getSignedJwtToken();
+
+  // Create cookie
+  const options = {
+    expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000),
+    httpOnly: true
+  };
+
+  res.status(statusCode)
+    .cookie('token', token, options)
+    .json({
+      success: true,
+      token
+    });
+};
+```
 
 
 
