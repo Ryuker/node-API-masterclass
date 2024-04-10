@@ -194,6 +194,14 @@ router.post('/login', login);
 # 5. Sending JWT in a cookie
 [cookie parser GH page](https://github.com/expressjs/cookie-parser)
 - to install: `npm i cookie-parser`
+- imported into `server.js` and added to middleware
+``` JS server.js
+const cookieParser = require('cookie-parser');
+
+~~~ below Body Parser ~~~
+app.use(cookieParser());
+```
+
 
 
 
