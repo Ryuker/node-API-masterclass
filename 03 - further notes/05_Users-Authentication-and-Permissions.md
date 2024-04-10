@@ -245,6 +245,9 @@ if (process.env.NODE_ENV === 'production') {
 
 # 6. Auth Protect Middleware
 - validating the token
+- Normally when creating a bootcamp we'd need to send a header with a `Authorization` key 
+  - the value of the key is usually `Bearer {token value}`
+- 
 
 
 
