@@ -37,7 +37,7 @@ router
 router
   .route('/:id')
   .get(getBootcamp)
-  .put(updateBootcamp)
+  .put(protect, updateBootcamp)
   .delete(protect, deleteBootcamp);
 
 // Upload photo
