@@ -289,6 +289,16 @@ exports.protect = asyncHandler(async (req, res, next) => {
 });
 ```
 
+## Using the protect middleware in Bootcamp routes
+- We import it into `routes/bootcamps.js`
+``` JS routes/bootcamps.js
+~~~ Router declaration ~~~
+const { protect } = require('../middleware/auth');
+```
+- We then add it in the router request where it would apply
+  - example  `.post(protect, createBootcamp);`
+
+
 
 
 
