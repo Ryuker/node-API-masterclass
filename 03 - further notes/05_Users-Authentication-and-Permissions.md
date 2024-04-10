@@ -336,6 +336,23 @@ router.get('/me', protect, getMe);
   - We do this for Create, Update, Delete, and Add Photo for bootcamp requests
   - We also do this for Create, Update, Delete for course request
 
+# 8. Role Authorization
+- Added middleware method to `middleware/auth.js` to grant access to specific roles
+  - it takes in roles, which we destructure using the ... operator
+  - it sends a `forbidden` error when the role doesn't have access
+  - if not the it calls `next()` to move on
+``` JS middleware/auth.js
+// Grant access to specific roles
+exports.authorize = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(new ErrorResponse(`User role ${req.user.role} is not authorized to access this route`, 403));
+    }
+    next();
+  };
+};
+```
+
 
   
 
