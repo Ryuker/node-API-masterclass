@@ -247,7 +247,47 @@ if (process.env.NODE_ENV === 'production') {
 - validating the token
 - Normally when creating a bootcamp we'd need to send a header with a `Authorization` key 
   - the value of the key is usually `Bearer {token value}`
-- 
+
+## Protect Middleware
+- Added `middleware/auth.js`
+- Added protect method
+  - this method splits the token so we only get the token value
+  - then it makes sure the token exists, if it doesn't it send a unauthorized errorResponse
+  - if the token exists it verified if the token is correct
+    - if it does it sets the user on the request to the user that matches the decoded id
+      - this way the user is only set when we've received the correct token
+``` JS middleware/auth.js
+// Protect routes
+exports.protect = asyncHandler(async (req, res, next) => {
+  let token;
+
+  if( req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    token = req.headers.authorization.split(' ')[1];
+  } 
+  // else if(req.cookies.token) {
+  //   token = req.cookies.token;
+  // }
+
+  // Make sure token exists
+  if(!token) {
+    return next(new ErrorResponse('Not authorized to access this route', 401));
+  }
+
+  try {
+    // Verify token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    
+    console.log(decoded);
+
+    req.user = await User.findById(decoded.id);
+
+    next();
+  } catch (err) {
+    return next(new ErrorResponse('Not authorized to access this route', 401));
+  }
+
+});
+```
 
 
 
