@@ -233,6 +233,15 @@ const sendTokenResponse = (user, statusCode, res) => {
 sendTokenResponse(user, 200, res);
 ```
 
+## Cookie secure flag
+- By default the cookie is sent with a secure flag of false
+  - but in production we want to set it to true (send it with HTTPS)
+``` JS controlles/auth.js | sendTokenResponse()
+~~~ cookie options ~~~
+if (process.env.NODE_ENV === 'production') {
+  options.secure = true;
+}
+```
 
 
 
