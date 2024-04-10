@@ -326,8 +326,18 @@ const { protect } = require('../middleware/auth');
 router.get('/me', protect, getMe);
 ```
 
-# Storing The Token in Postman
+# 7. Storing The Token in Postman
+- in postman:
+  - added `pm.environment.set("TOKEN", pm.response.json().token)` in the tests tab of the `register` and `login` requests
+  - this sets a new environment variable to the token we received from the register/login attempt
 
+  - in `Get Logged In User` in the `Authorization` tab we then specify it use to use Bearer token and pass the enviroment variable
+    - `{{TOKEN}}` - we use double curly brace to specify an enviroment variable
+  - We do this for Create, Update, Delete, and Add Photo for bootcamp requests
+  - We also do this for Create, Update, Delete for course request
+
+
+  
 
 
 
