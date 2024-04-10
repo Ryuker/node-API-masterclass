@@ -227,6 +227,11 @@ const sendTokenResponse = (user, statusCode, res) => {
     });
 };
 ```
+- We then use this to send a response in the auth request handlers
+  - so we replace the response that's already there
+``` JS controllers/auth.js
+sendTokenResponse(user, 200, res);
+```
 
 
 

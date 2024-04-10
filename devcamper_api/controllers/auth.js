@@ -19,8 +19,7 @@ exports.register = asyncHandler(async (req, res, next) => {
   // Create token
   const token = user.getSignedJwtToken();
 
-
-  res.status(200).json({ success: true, token, data: user });
+  sendTokenResponse(user, 200, res);
 });
 
 // @desc    Login user
@@ -48,11 +47,7 @@ exports.login = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(`Invalid credentials`, 401));
   }
 
-  // Create token
-  const token = user.getSignedJwtToken();
-
-
-  res.status(200).json({ success: true, token, data: user });
+  sendTokenResponse(user, 200, res);
 });
 
 // Get token from model, create cookie and send response
