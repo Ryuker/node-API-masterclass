@@ -298,6 +298,8 @@ const { protect } = require('../middleware/auth');
 - We then add it in the router request where it would apply
   - example  `.post(protect, createBootcamp);`
 
+- We do this for both bootcamps and courses
+
 
 
 
