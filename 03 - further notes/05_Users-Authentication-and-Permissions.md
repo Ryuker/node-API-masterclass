@@ -353,6 +353,17 @@ exports.authorize = (...roles) => {
 };
 ```
 
+## Using role authorization middleware in the routes
+- similar to the using the protect middleware we import it from the auth middleware in the route
+- then we run it after protect and before the request handler method
+  - only for the request where this is applicable of course
+``` JS routes/bootcamps.js
+const { protect, authorize } = require('../middleware/auth');
+
+.post(protect, authorize('publisher', 'admin'), createBootcamp);
+```
+- we do the same for course routes
+ 
 
   
 
