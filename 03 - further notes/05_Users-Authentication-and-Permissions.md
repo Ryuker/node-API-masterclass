@@ -243,6 +243,9 @@ if (process.env.NODE_ENV === 'production') {
 }
 ```
 
+# 6. Auth Protect Middleware
+- validating the token
+
 
 
 
