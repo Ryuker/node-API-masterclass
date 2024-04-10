@@ -363,7 +363,9 @@ const { protect, authorize } = require('../middleware/auth');
 .post(protect, authorize('publisher', 'admin'), createBootcamp);
 ```
 - we do the same for course routes
- 
+
+# 9. Adding a User To a Bootcamp
+
 
   
 
