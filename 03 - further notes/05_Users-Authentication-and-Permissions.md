@@ -424,6 +424,16 @@ exports.updateBootcamp = asyncHandler(async (req, res, next ) => {
 });
 ```
 
+## Making sure user can only delete own bootcamp
+- Used same validation check as we used for the updateBootcamp handler
+``` JS controllers/bootcamps.js
+~~~ Check if Bootcamp exists ~~~
+// Make sure user is bootcamp owner
+if(bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin'){
+  return next(new ErrorResponse(`User ${req.params.id} is not authorized to delete this bootcamp`, 401));
+}
+```
+
 
   
 
