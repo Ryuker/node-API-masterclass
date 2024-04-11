@@ -396,6 +396,33 @@ if(publishedBootcamp && req.user.role !== 'admin'){
 ```
 
 # 10. Bootcamp Ownership
+- To ensure users that aren't admin can't update bootcamps that aren't their own 
+  - modified the `updateBootcamp` handler
+    - we get the bootcamp by id but then run some validation before we actually update it
+``` JS controllers/bootcamps.js
+exports.updateBootcamp = asyncHandler(async (req, res, next ) => {
+  let bootcamp = await Bootcamp.findById(req.params.id);
+
+  // Send 400 if the ID didn't return a result from the database
+  if (!bootcamp) {
+    return next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404));
+  }
+
+  // Make sure user is bootcamp owner
+  if(bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin'){
+    return next(new ErrorResponse(`User ${req.params.id} is not authorized to update this bootcamp`, 401));
+  }
+  
+  // Update the bootcamp
+  bootcamp = await Bootcamp.findOneAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true
+  });
+
+  res.status(200)
+    .json( { success: true, data: bootcamp });
+});
+```
 
 
   
