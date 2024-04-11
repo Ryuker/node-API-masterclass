@@ -365,7 +365,21 @@ const { protect, authorize } = require('../middleware/auth');
 - we do the same for course routes
 
 # 9. Adding a User To a Bootcamp
-
+- Added this to the schema in `models/Bootcamp.js`
+``` JS models/Bootcamp.js
+user: {
+  type: mongoose.Schema.ObjectId,
+  ref: 'User',
+  required: true
+}
+```
+- The added this to the `createBootcamp` handler in `controllers/bootcamps.js`
+``` JS controllers/bootcamps.js
+// Add user to req.body
+  req.body.user = req.user.id;
+```
+  - this works because have the user id added to the request by the protect method that run before this handler.
+- 
 
   
 
