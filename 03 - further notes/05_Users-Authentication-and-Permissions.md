@@ -395,6 +395,9 @@ if(publishedBootcamp && req.user.role !== 'admin'){
 }
 ```
 
+# 10. Bootcamp Ownership
+
+
   
 
 
