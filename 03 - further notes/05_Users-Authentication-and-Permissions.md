@@ -435,6 +435,9 @@ if(bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin'){
 ```
 - we do the same for the `photoUpload` handler
 
+# 11. Courses Ownership
+
+
 
   
 
