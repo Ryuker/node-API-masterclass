@@ -379,7 +379,21 @@ user: {
   req.body.user = req.user.id;
 ```
   - this works because have the user id added to the request by the protect method that run before this handler.
-- 
+
+## Restricting user role to only be able to create 1 bootcamp
+- This is relevant for the course, but will probably remove this later.
+- Looked if there's already a bootcamp for this user in the database.
+  - if there is returns an error response
+  - else proceed as planned
+``` JS controllers/bootcamps.js | createBootcamp()
+// Check for published bootcamp
+  const publishedBootcamp = await Bootcamp.findOne({ user: req.user.id });
+
+// If the user is not an admin, they can only add one bootcamp
+if(publishedBootcamp && req.user.role !== 'admin'){
+  return next(new ErrorResponse(`The user with ID ${req.user.id} has already published a bootcamp`, 400));
+}
+```
 
   
 
