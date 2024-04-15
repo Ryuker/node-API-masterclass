@@ -436,7 +436,14 @@ if(bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin'){
 - we do the same for the `photoUpload` handler
 
 # 11. Courses Ownership
-
+- Added `User` field to the `Course` schema
+``` JS models/Course.js
+user: {
+  type: mongoose.Schema.ObjectId,
+  ref: 'User',
+  required: true
+}
+```
 
 
   
