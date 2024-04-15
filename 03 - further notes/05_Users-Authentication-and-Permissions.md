@@ -436,6 +436,8 @@ if(bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin'){
 - we do the same for the `photoUpload` handler
 
 # 11. Courses Ownership
+
+## Add Course
 - Added `User` field to the `Course` schema
 ``` JS models/Course.js
 user: {
@@ -444,7 +446,34 @@ user: {
   required: true
 }
 ```
+- Added validation of bootcamp to `controllers/bootcamps.js`
+``` JS controllers/bootcamps.js
+~~~ check if there is a bootcamp ~~~
+s
+// Make sure user is bootcamp owner
+if(bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin'){
+  return next(new ErrorResponse(`User ${req.user.id} is not authorized to add a course to bootcamp ${bootcamp._id}`, 401));
+}
+```
 
+## Update Course
+- Added check to see if user is the course owner to the `updateCourse` handler
+``` JS controllers/courses.js
+~~~ Check if there is a bootcamp ~~~
+// Make sure user is course owner
+if(course.user.toString() !== req.user.id && req.user.role !== 'admin'){
+  return next(new ErrorResponse(`User ${req.user.id} is not authorized to update course ${course._id}`, 401));
+}
+```
+
+## Delete course
+- Added check to see if user is the course owner to the `deleteCourse` handler
+``` JS controllers/courses.js
+// Make sure user is course owner
+if(course.user.toString() !== req.user.id && req.user.role !== 'admin'){
+  return next(new ErrorResponse(`User ${req.user.id} is not authorized to update course ${course._id}`, 401));
+}
+```
 
   
 
