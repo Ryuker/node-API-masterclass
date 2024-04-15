@@ -475,6 +475,9 @@ if(course.user.toString() !== req.user.id && req.user.role !== 'admin'){
 }
 ```
 
+# 12. Forgot Password - Generate Token
+
+
   
 
 
