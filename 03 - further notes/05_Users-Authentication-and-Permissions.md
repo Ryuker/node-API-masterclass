@@ -573,6 +573,10 @@ const sendEmail = async (options) => {
 module.exports = sendEmail;
 ```
 
+## Using the sendEmail utils functin
+- imported the function into `controllers/auth.js
+
+
 
 
 
