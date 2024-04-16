@@ -476,6 +476,64 @@ if(course.user.toString() !== req.user.id && req.user.role !== 'admin'){
 ```
 
 # 12. Forgot Password - Generate Token
+- in `models/User.js` we import the crypto package, `const crypto = require('crypto');`
+- we then added `getResetPasswordToken` method on the schema 
+``` JS models/User.js
+// Generate and hash password token
+UserSchema.methods.getResetPasswordToken = function(){
+  // Generate token
+  const resetToken = crypto.randomBytes(20).toString('hex');
+
+  // Hash token and set to resetPasswordToken field
+  this.resetPasswordToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+
+  // Set expire
+  this.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
+
+  return resetToken;
+};
+```
+- Added `forgotPassword` handler to `controllers/auth.js`
+``` JS controllers/auth.js
+// @desc    Forgot password
+// @route   POST /api/v1/auth/forgotpassword
+// @access  Public
+exports.forgotPassword = asyncHandler(async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.email });
+
+  if (!user) {
+    return next(new ErrorResponse(`There's no user with that email`, 404));
+  }
+
+  // Get reset token
+  const resetToken = user.getResetPasswordToken();
+
+  await user.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    success: true,
+    data: user
+  })
+});
+```
+- Added forgotPassword route to `routes/auth.js`
+``` js routes/auth.js
+router.post('/forgotpassword', forgotPassword);
+```
+
+- Modified `save` pre method in `models/User.js`
+``` JS models/User.js
+// Encrypt password using bcrypt
+UserSchema.pre('save', async function(next) {
+  if(!this.isModified('password')) {
+    next();
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+})
+```
+- 
 
 
   
