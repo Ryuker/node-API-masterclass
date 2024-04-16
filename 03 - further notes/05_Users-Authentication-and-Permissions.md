@@ -535,6 +535,18 @@ UserSchema.pre('save', async function(next) {
 ```
 
 # 13.Forgot Password - send email
+[NodeMailer Website](https://www.nodemailer.com/)
+- Using this for sending the email
+- install: `npm i nodemailer`
+[MailTrap Website](https://www.mailtrap.io/)
+- for testing emails
+
+- Made an account for MailTrap
+- Copied some of the info over to `config.env`
+
+
+- 
+
 
 
 
