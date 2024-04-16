@@ -573,9 +573,36 @@ const sendEmail = async (options) => {
 module.exports = sendEmail;
 ```
 
-## Using the sendEmail utils functin
+## Using the sendEmail utils function
 - imported the function into `controllers/auth.js
 
+- modified the forgotPassword handler
+``` JS controllers/auth.js
+~~ under user.save() ~~
+// Create reset url
+const resetUrl = `${req.protocol}://${req.get('host')}/api/v1/resetpassword/${resetToken}}`;
+
+const message = `You are receiving this email because you (or someone else) has requested the reset of a password. Please make a PUT request to: \n\n ${{resetUrl}}`;
+
+try {
+  await sendEmail({
+    email: user.email,
+    subject: 'Password reset token',
+    message
+  });
+  
+  res.status(200).json({ success: true, data: 'Email sent'});
+
+} catch(err) {
+  console.log(err);
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpire = undefined;
+
+  await user.save({ validateBeforeSave: false });
+
+  return next(new ErrorResponse('Email could not be sent', 500));
+}
+```
 
 
 
