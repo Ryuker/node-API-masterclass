@@ -604,6 +604,8 @@ try {
 }
 ```
 
+# 14. Reset Password
+
 
 
 
