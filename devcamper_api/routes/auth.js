@@ -1,5 +1,5 @@
 const express = require('express');
-const { register, login, getMe, forgotPassword, resetPassword } = require('../controllers/auth');
+const { register, login, getMe, forgotPassword, resetPassword, updateDetails } = require('../controllers/auth');
 
 const router = express.Router();
 
@@ -13,6 +13,9 @@ router.post('/login', login);
 
 // Me
 router.get('/me', protect, getMe);
+
+// Update details
+router.put('/updatedetails', protect, updateDetails);
 
 // Forgot password
 router.post('/forgotpassword', forgotPassword);
