@@ -664,6 +664,35 @@ exports.updateDetails = asyncHandler(async (req, res, next) => {
 router.put('/updatedetails', protect, updateDetails);
 ```
 
+## UpdatePassword handler and route
+- Added `updatePassword` handler to `controllers/auth.js`
+``` JS controllers/auth.js
+// @desc    Update password
+// @route   PUT /api/v1/auth/updatepassword
+// @access  Private
+exports.updatePassword = asyncHandler(async (req, res, next) => {
+
+
+  const user = await User.findById(req.user.id).select('+password');
+
+  // Check current password
+  if(!(await user.matchPassword(req.body.currentPassword))) {
+    return next(new ErrorResponse('Password is incorrect', 401));
+  }
+
+  user.password = req.body.newPassword;
+  
+  await user.save();
+
+  sendTokenResponse(user, 200, res);
+
+});
+```
+- Added route to `routes/auth.js`
+``` JS routes/auth.js
+// Update password
+router.put('/updatepassword', protect, updatePassword);
+```
 
 
 
