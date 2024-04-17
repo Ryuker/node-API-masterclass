@@ -633,6 +633,7 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
 });
 ```
 
+# 15. Update User Details
 
 
 
