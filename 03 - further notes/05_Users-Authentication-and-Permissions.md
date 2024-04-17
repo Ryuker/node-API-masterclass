@@ -694,6 +694,8 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
 router.put('/updatepassword', protect, updatePassword);
 ```
 
+# 16. Admin Users CRUD
+
 
 
   
