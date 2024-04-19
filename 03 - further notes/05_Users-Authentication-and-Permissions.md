@@ -709,6 +709,25 @@ exports.getUsers = asyncHandler(async (req, res, next) => {
 });
 ```
 
+## getUser handler (for single user)
+- Added `getUser` handler
+``` JS controllers/users.js
+// @desc    Get single user
+// @route   GET /api/v1/auth/users/:id
+// @access  Private/Admin
+exports.getUser = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return new ErrorResponse(`User ${req.params.id} not found`, 400);
+  }
+  
+  res.status(200).json({ success: true, data: user });
+});s
+```
+
+
+
 
 
 
