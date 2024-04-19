@@ -743,6 +743,26 @@ exports.createUser = asyncHandler(async (req, res, next) => {
 });
 ```
 
+## updateUser handler
+- Added `updateUser` handler
+``` JS controllers/users.js
+// @desc    Update user
+// @route   PUT /api/v1/auth/users/:id
+// @access  Private/Admin
+exports.updateUser = asyncHandler(async (req, res, next) => {
+  const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true
+  });
+
+  if (!user) {
+    return new ErrorResponse('Something went wrong updating the user', 400);
+  }
+  
+  res.status(200).json({ success: true, data: user });
+});
+```
+
 
 
 
