@@ -695,6 +695,23 @@ router.put('/updatepassword', protect, updatePassword);
 ```
 
 # 16. Admin Users CRUD
+- Added `controllers/users.js` with imports
+  - this is for private and admin access only
+
+## getUsers handler
+- Added `getUsers` handler 
+``` JS controllers/users.js
+// @desc    Get all users
+// @route   GET /api/v1/auth/users
+// @access  Private/Admin
+exports.getUsers = asyncHandler(async (req, res, next) => {
+  res.status(200).json(res.advancedResults);
+});
+```
+
+
+
+
 
 
 
