@@ -126,4 +126,13 @@ module.exports = router;
 ## importing reviews as middleware into server
 - added reviews route as middleware
 
+## Rerouting to review in bootcamps router
+- added following lines to `routes/bootcamps.js`
+``` JS routes/bootcamps.js
+~~~ include other resource routers ~~~
+const reviewRouter = require('./reviews');
+
+~~~ re-route into other resource routers ~~~
+router.use('/:bootcampId/reviews', reviewRouter);
+```
 
