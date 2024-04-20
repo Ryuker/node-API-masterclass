@@ -1,8 +1,3 @@
-# Bootcamp Reviews & Ratings notes
-
-# 1. Review Model & Get Reviews
-- Added `models/Reviews.js` with a ReviewSchema exported
-``` JS models/Reviews.js
 const mongoose = require('mongoose');
 
 const ReviewSchema = new mongoose.Schema({
@@ -43,4 +38,3 @@ const ReviewSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Review', ReviewSchema);
-```
