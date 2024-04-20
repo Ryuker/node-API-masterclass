@@ -1,6 +1,6 @@
 const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
-const Review = require('../models/Reviews');
+const Review = require('../models/Review');
 const Bootcamp = require('../model/Bootcamp');
 
 // @desc    Get all reviews
