@@ -122,3 +122,8 @@ router.route('/')
 
 module.exports = router;
 ```
+
+## importing reviews as middleware into server
+- added reviews route as middleware
+
+
