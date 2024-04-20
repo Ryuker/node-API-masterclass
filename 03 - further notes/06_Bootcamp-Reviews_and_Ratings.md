@@ -76,28 +76,6 @@ exports.getReviews = asyncHandler(async (req, res, next) => {
 });
 ```
 
-## getReview handler
-``` JS controllers/reviews.js
-// @desc    Get single review
-// @route   GET /api/v1/reviews/:id
-// @access  Public
-exports.getReview = asyncHandler(async (req, res, next) => {
-  const review = await Review.findById(req.params.id).populate({
-    path: 'bootcamp',
-    select: 'name description'
-  });
-
-  if (!review) {
-    return next(new ErrorResponse(`No review with the id of ${req.params.id}`), 404);
-  };
-
-  res.status(200).json({
-    success: true, 
-    data: review
-  })
-});
-```
-
 ## reviews routes
 - Added `routes/reviews.js`
 ``` JS routes/reviews.js
@@ -135,4 +113,37 @@ const reviewRouter = require('./reviews');
 ~~~ re-route into other resource routers ~~~
 router.use('/:bootcampId/reviews', reviewRouter);
 ```
+
+# 2. Get Single Review & Update Seeder
+- Added `getReview`
+## getReview handler
+``` JS controllers/reviews.js
+// @desc    Get single review
+// @route   GET /api/v1/reviews/:id
+// @access  Public
+exports.getReview = asyncHandler(async (req, res, next) => {
+  const review = await Review.findById(req.params.id).populate({
+    path: 'bootcamp',
+    select: 'name description'
+  });
+
+  if (!review) {
+    return next(new ErrorResponse(`No review found with the id of ${req.params.id}`), 404);
+  };
+
+  res.status(200).json({
+    success: true, 
+    data: review
+  })
+});
+```
+- Added getReview route to `routes/reviews.js`
+
+``` JS routes/reviews.js
+// Get Single Review
+router.route('/:id')
+  .get(getReview);
+```
+
+
 
