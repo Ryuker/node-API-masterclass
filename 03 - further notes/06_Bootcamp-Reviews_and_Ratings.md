@@ -244,5 +244,11 @@ exports.updateReview = asyncHandler(async (req, res, next) => {
   })
 });
 ```
+- Added `updateReview` route
+``` JS routes/reviews.js
+~~~ /:id ~~~ route
+.put(protect, authorize('user', 'admin'), updateReview);
+```
+
 
 
