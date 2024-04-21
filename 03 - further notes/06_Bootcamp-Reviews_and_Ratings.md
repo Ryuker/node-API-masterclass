@@ -209,7 +209,7 @@ ReviewSchema.post('save', function(){
 });
 
 // Call getAverageRating before deleteOne
-ReviewSchema.pre('deleteOne', {document: true, query: false }, function(){
+ReviewSchema.post('deleteOne', {document: true, query: false }, function(){
   this.constructor.getAverageRating(this.bootcamp);
 });
 ```
@@ -233,10 +233,13 @@ exports.updateReview = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse('Not authorized to update review', 401));
   }
 
-  review = await Review.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true
-  });
+  // Update the review
+  for(let prop in req.body){
+    review[prop] = req.body[prop];
+  }
+
+  // Save the review, triggering the 'save' middleware
+  review = await review.save();
   
   res.status(200).json({
     success: true, 
