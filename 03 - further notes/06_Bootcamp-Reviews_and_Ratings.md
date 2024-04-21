@@ -174,3 +174,44 @@ exports.addReview = asyncHandler(async (req, res, next) => {
 ReviewSchema.index({ bootcamp: 1, user: 1 }, { unique: true });
 ```
 
+# 4. Calculate Average Rating & Save
+- Added static method `models/Review.js` to get the average rating
+``` JS models/Review.js
+// Static method to get avg rating
+ReviewSchema.statics.getAverageRating = async function(bootcampId){
+
+  const obj = await this.aggregate([
+    {
+      $match: { bootcamp: bootcampId }
+    },
+    {
+      $group: {
+        _id: '$bootcamp',
+        averageRating: { $avg: '$rating' }
+      }
+    }
+  ]);
+
+  try {
+    await this.model('Bootcamp').findByIdAndUpdate(bootcampId, {
+      averageRating: obj[0].averageRating
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+```
+- Added calls below the method
+``` JS models/Review.js
+// Call getAverageRating after save
+ReviewSchema.post('save', function(){
+  this.constructor.getAverageRating(this.bootcamp);
+});
+
+// Call getAverageRating before deleteOne
+ReviewSchema.pre('deleteOne', {document: true, query: false }, function(){
+  this.constructor.getAverageRating(this.bootcamp);
+});
+```
+
+
