@@ -168,5 +168,9 @@ exports.addReview = asyncHandler(async (req, res, next) => {
 - Added `.post(protect, authorize('user', 'admin'), addReview);` to the `/` route 
 
 ## Restrict users to only add 1 review per bootcamp
-
+- added an `index` to `models/Review.js` under the schema
+``` JS models/Review.js
+// Prevent user from submitting more than one review per bootcamp
+ReviewSchema.index({ bootcamp: 1, user: 1 }, { unique: true });
+```
 
