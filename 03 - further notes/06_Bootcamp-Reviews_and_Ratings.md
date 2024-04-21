@@ -167,4 +167,6 @@ exports.addReview = asyncHandler(async (req, res, next) => {
 ```
 - Added `.post(protect, authorize('user', 'admin'), addReview);` to the `/` route 
 
+## Restrict users to only add 1 review per bootcamp
+
 
