@@ -1,5 +1,5 @@
 const express = require('express');
-const { getReviews, getReview } = require('../controllers/reviews');
+const { getReviews, getReview, addReview } = require('../controllers/reviews');
 
 const Review = require('../models/Review');
 
@@ -16,7 +16,8 @@ router.route('/')
       select: 'name description'
     }),
     getReviews
-  );
+  )
+  .post(protect, authorize('user', 'admin'), addReview);
 
 // Get Single Review
 router.route('/:id')
