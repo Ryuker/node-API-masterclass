@@ -68,3 +68,5 @@ const mongoSanitize = require('express-mongo-sanitize');
 // Sanitize data
 app.use(mongoSanitize());
 ```
+
+# 3. XSS Protection & Security Headers
