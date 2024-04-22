@@ -58,3 +58,13 @@ packages:
 ``` JS Terminal
 npm i express-mongo-sanitize
 ```
+
+## adding mongo sanitize as middleware
+- imported into `server.js`
+``` JS server.js
+const mongoSanitize = require('express-mongo-sanitize');
+
+~~~ File Uploading Middleware ~~~
+// Sanitize data
+app.use(mongoSanitize());
+```
