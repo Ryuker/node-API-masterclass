@@ -35,3 +35,26 @@ router.get('/logout', logout);
 ```
 
 - Commented the cookies check again for now
+
+# 2. Prevent NoSQL Injections
+
+## Injection vulnerability explained
+- it's possible to send the following request object
+```JS Postman
+{
+  "email": {"$gt":""},
+  "password": '123456'
+}
+```
+- the above gets the first user in the database that has this password.
+  - This means guessing weak passwords makes it possible for a sql injection to get the user
+
+## Options to counter this
+packages: 
+- [mongo-sanitize](https://github.com/vkarpov15/mongo-sanitize)
+- [express-mongo-sanitize](https://github.com/fiznool/express-mongo-sanitize)
+  This one we'll be using since we can just bring it in as middleware
+- to install:
+``` JS Terminal
+npm i express-mongo-sanitize
+```
