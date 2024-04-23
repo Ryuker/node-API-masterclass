@@ -70,6 +70,28 @@ app.use(mongoSanitize());
 ```
 
 # 3. XSS Protection & Security Headers
-packages: 
+
+## install Helmet
 - [Helmet](https://helmetjs.github.io/) : provides a bunch of header values to make the api more secure
-- to install: `npm i helmet`
+- to install: `npm i helmet` 
+- added as middleware
+``` JS server.js
+const helmet = require('helmet');
+
+~~~ Sanitize Data ~~~
+// Set security headers
+app.use(helmet());
+``` 
+
+## XSS Clean 
+- this library has been deprecated, probably need to replaced with a different solution
+[XSS-Clean](https://github.com/jsonmaur/xss-clean)
+- to install: `npm i xss-clean`
+- imported as middleware
+``` JS server.js
+const xss = require('xss-clean');
+
+~~~ Set Security Headers ~~~
+// Prevent XSS attacks
+app.use(xss());
+```
