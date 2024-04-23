@@ -99,7 +99,7 @@ const xss = require('xss-clean');
 app.use(xss());
 ```
 
-# Alternatives for XSS protection
+## Alternatives for XSS protection
 - since the above solution is deprecated and it still updates the database string with weird values it would be better to validate the string for proper formatting imo.
 
 **here's some options:**
@@ -110,4 +110,35 @@ app.use(xss());
 - [JOI](https://joi.dev/api/?v=17.13.0) - [example video](https://www.youtube.com/watch?v=_svzevhv4vg)
   - example of using with mongoose - [here](https://gist.github.com/stongo/6359042)
   - allows for joi validation in mongoose schema's - [joigoose](https://github.com/yoitsro/joigoose)
+
+# 4. Rate Limiting, hpp & cors
+packages: 
+- [express-rate-limit](https://github.com/express-rate-limit/express-rate-limit) - limits request per (x) time
+- to install: `npm i express-rate-limit`
+- added as middleware 
+``` JS server.js
+const rateLimit = require('express-rate-limit');
+
+~~~ Prevent XSS attacks ~~~
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000,
+  max: 1
+});
+
+app.use(limiter);
+```
+
+- [hpp](https://github.com/analog-nico/hpp) - prevents sending duplicate parameter values
+- to install: `npm i hpp`
+- added as middleware
+``` JS server.js
+const hpp = require('hpp');
+
+~~~ Rate limiting ~~~
+// Prevent https param pollution attacks
+app.use(hpp());
+```
+
+
 
