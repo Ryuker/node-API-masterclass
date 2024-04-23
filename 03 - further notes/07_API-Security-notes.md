@@ -86,6 +86,9 @@ app.use(helmet());
 ## XSS Clean 
 - this library has been deprecated, probably need to replaced with a different solution
 [XSS-Clean](https://github.com/jsonmaur/xss-clean)
+  - this replaces `<script>` by `&lt;script>` in any string passed in an object to the database
+    - effectively this prevents the user from passing `<script>alert(1)</script>` as a field in the database
+
 - to install: `npm i xss-clean`
 - imported as middleware
 ``` JS server.js
@@ -95,3 +98,16 @@ const xss = require('xss-clean');
 // Prevent XSS attacks
 app.use(xss());
 ```
+
+# Alternatives for XSS protection
+- since the above solution is deprecated and it still updates the database string with weird values it would be better to validate the string for proper formatting imo.
+
+**here's some options:**
+- some advice - [here](https://medium.com/@ferrosful/nodejs-security-unleashed-exploring-xss-attack-8d3a61a01a09)
+- [Express Validator](https://express-validator.github.io/docs/)
+- [XSS](https://jsxss.com/en/index.html)
+- Fast one - [VineJS](https://vinejs.dev/docs/introduction)
+- [JOI](https://joi.dev/api/?v=17.13.0) - [example video](https://www.youtube.com/watch?v=_svzevhv4vg)
+  - example of using with mongoose - [here](https://gist.github.com/stongo/6359042)
+  - allows for joi validation in mongoose schema's - [joigoose](https://github.com/yoitsro/joigoose)
+
