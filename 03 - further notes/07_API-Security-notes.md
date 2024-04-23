@@ -112,7 +112,8 @@ app.use(xss());
   - allows for joi validation in mongoose schema's - [joigoose](https://github.com/yoitsro/joigoose)
 
 # 4. Rate Limiting, hpp & cors
-packages: 
+
+## Rate Limit Requests
 - [express-rate-limit](https://github.com/express-rate-limit/express-rate-limit) - limits request per (x) time
 - to install: `npm i express-rate-limit`
 - added as middleware 
@@ -129,6 +130,7 @@ const limiter = rateLimit({
 app.use(limiter);
 ```
 
+## Prevent HTTP Parameter Pollution attacks
 - [hpp](https://github.com/analog-nico/hpp) - prevents sending duplicate parameter values
 - to install: `npm i hpp`
 - added as middleware
