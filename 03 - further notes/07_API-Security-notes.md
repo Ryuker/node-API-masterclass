@@ -70,3 +70,6 @@ app.use(mongoSanitize());
 ```
 
 # 3. XSS Protection & Security Headers
+packages: 
+- [Helmet](https://helmetjs.github.io/) : provides a bunch of header values to make the api more secure
+- to install: `npm i helmet`
