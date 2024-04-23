@@ -142,5 +142,11 @@ const hpp = require('hpp');
 app.use(hpp());
 ```
 
+## CORS - allow communication between different domains with the api
+- [CORS](https://github.com/expressjs/cors)
+- to install: `npm i cors`
+- added as middleware
+
+
 
 
