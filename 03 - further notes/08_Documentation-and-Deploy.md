@@ -34,4 +34,6 @@ docgen build -i devcamper/dc.postman_collection.json -o index.html
   ```
   - then copy the code from `<script>~~code here~~</script>` that sits above the footer (contains the jquery)
     - paste it into a `script.js` file, this is the file that gets imported in the head
+
+# 2. Digital Ocean Droplet & SSH
     
