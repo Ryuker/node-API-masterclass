@@ -36,4 +36,6 @@ docgen build -i devcamper/dc.postman_collection.json -o index.html
     - paste it into a `script.js` file, this is the file that gets imported in the head
 
 # 2. Digital Ocean Droplet & SSH
+
+- [How to Deploy to Render](https://www.freecodecamp.org/news/how-to-deploy-nodejs-application-with-render/)
     
